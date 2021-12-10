@@ -43,6 +43,7 @@ public class NhanVienController {
 	private JButton btnSave;
 	private JComboBox cbFilter;
 	private JButton btnFind;
+	private JComboBox cbStatus;
     private NhanVienDao dao;
     private int mode;
     
@@ -51,7 +52,7 @@ public class NhanVienController {
     public NhanVienController(JTextField txfID, JTextField txfName, JTextField txfPhone, JTextField txfAddress,
 			JTextField txfEmail, JTextField txfPasswd, JTextField txfFind, JDateChooser txdate, JTable table,
 			JComboBox cbRole, JComboBox cbGender, Canvas canvasAvt, JButton btnUpload, JButton btnAdd, JButton btnEdit,
-			JButton btnDisable, JButton btnCancel, JButton btnSave, JComboBox cbFilter, JButton btnFind) {
+			JButton btnDisable, JButton btnCancel, JButton btnSave, JComboBox cbFilter, JButton btnFind, JComboBox cbStatus) {
 		super();
 		this.txfID = txfID;
 		this.txfName = txfName;
@@ -73,9 +74,11 @@ public class NhanVienController {
 		this.btnSave = btnSave;
 		this.cbFilter = cbFilter;
 		this.btnFind = btnFind;
+		this.cbStatus = cbStatus;
 		dao = new NhanVienDaoImpl();
 		loadTable(dao.getAll());
 		setEvent();
+		buttonChangeStats(1);
 	}
 
 	public void setEvent() {	
@@ -143,7 +146,8 @@ public class NhanVienController {
 								txfEmail.getText(),
 								txfPasswd.getText(),
 								null,
-								cbRole.getSelectedIndex()+1
+								cbRole.getSelectedIndex()+1,
+								cbStatus.getSelectedIndex() == 0? 1: 0
 								));
 						loadTable(dao.getAll());
 						buttonChangeStats(1);
@@ -161,7 +165,8 @@ public class NhanVienController {
 								txfEmail.getText(),
 								txfPasswd.getText(),
 								null,
-								cbRole.getSelectedIndex()+1
+								cbRole.getSelectedIndex()+1,
+								cbStatus.getSelectedIndex() == 0? 1: 0
 								));
 						loadTable(dao.getAll());
 						buttonChangeStats(1);
@@ -172,13 +177,13 @@ public class NhanVienController {
     }
 
 	public void loadTable(List<NhanVienModel> list) {
-		String[] labels= {"ID", "Tên Nhân Viên", "Giới tính", "Ngày sinh", "Điện thoại", "Địa chỉ", "Email", "Chức vụ", "Password", "Avatar"};
+		String[] labels= {"ID", "Tên Nhân Viên", "Giới tính", "Ngày sinh", "Điện thoại", "Địa chỉ", "Email", "Chức vụ", "Password", "Avatar", "Trạng thái"};
 		DefaultTableModel tableModel = new DefaultTableModel(labels, 0);
 		try {
 			for (NhanVienModel nhanvien : list) {
 				Object[] row = {nhanvien.getId(), nhanvien.getName(), nhanvien.getGender(), nhanvien.getDob(), 
 						nhanvien.getPhone(), nhanvien.getAddress(), nhanvien.getEmail(), nhanvien.getRole() == 1?"Quản lý":"Nhân viên",
-						nhanvien.getPassword(), nhanvien.getAvatar()};
+						nhanvien.getPassword(), nhanvien.getAvatar(), nhanvien.getStatus() == 1?"Enable":"Disable"};
 				tableModel.addRow(row);
 			}
 			this.table.setModel(tableModel);
@@ -199,7 +204,7 @@ public class NhanVienController {
 		txfEmail.setText(table.getValueAt(row, 6).toString());
 		cbRole.setSelectedIndex(table.getValueAt(row, 7).equals("Quản lý") ? 0: 1);
 		txfPasswd.setText(table.getValueAt(row, 8).toString());
-
+		cbStatus.setSelectedIndex(table.getValueAt(row, 10).equals("Enable") ? 0: 1);
 	}
 	
 	public void buttonChangeStats(int stat) {

@@ -37,6 +37,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setPassword(rs.getString("password"));
                 nhanvien.setPhone(rs.getString("SDT"));
                 nhanvien.setRole(rs.getInt("role"));
+                nhanvien.setStatus(rs.getInt("status"));
             }
 		}catch (Exception ex) {
 			ex.printStackTrace();
@@ -63,6 +64,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setPassword(rs.getString("password"));
                 nhanvien.setPhone(rs.getString("SDT"));
                 nhanvien.setRole(rs.getInt("role"));
+                nhanvien.setStatus(rs.getInt("status"));
 				list.add(nhanvien);
 			}
 		}catch(Exception ex) {
@@ -90,6 +92,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setPassword(rs.getString("password"));
                 nhanvien.setPhone(rs.getString("SDT"));
                 nhanvien.setRole(rs.getInt("role"));
+                nhanvien.setStatus(rs.getInt("status"));
 			}
 		}catch(Exception ex) {
 			System.out.println("ERROR:"+ex.getMessage());
@@ -100,7 +103,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 	public boolean insert(NhanVienModel nhanvien) {	
 		try {
 			String sql = 
-			"insert into nhanvien(tenNV, gioiTinh, ngaySinh, SDT, diaChi, email, password, avatar, role) "
+			"insert into nhanvien(tenNV, gioiTinh, ngaySinh, SDT, diaChi, email, password, avatar, role, status) "
 			+ "values(?,?,?,?,?,?,?,?,?)";
 			PreparedStatement st = cnn.prepareStatement(sql);
 			st.setString(1, nhanvien.getName());
@@ -112,6 +115,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 			st.setString(7, nhanvien.getPassword());
 			st.setString(8, nhanvien.getAvatar());
 			st.setInt(9, nhanvien.getRole());
+			st.setInt(10, nhanvien.getStatus());
 			st.execute();
 			System.out.println("Insert Successfully!");
 			return true;
@@ -124,8 +128,8 @@ public class NhanVienDaoImpl implements NhanVienDao{
 	public boolean update(NhanVienModel nhanvien) {	
 		try {
 			String sql = 
-			"update nhanvien set tenNV=? , gioiTinh=?, ngaySinh=?, SDT=?, diaChi=?, email=?, password=?, avatar=?, role=? "
-			+ "where idNV=?";
+			"update nhanvien set tenNV=? , gioiTinh=?, ngaySinh=?, SDT=?, diaChi=?, email=?, password=?, avatar=?, role=?, status=?"
+			+ " where idNV=?";
 			PreparedStatement st = cnn.prepareStatement(sql);
 			st.setString(1, nhanvien.getName());
 			st.setString(2, nhanvien.getGender());
@@ -136,7 +140,8 @@ public class NhanVienDaoImpl implements NhanVienDao{
 			st.setString(7, nhanvien.getPassword());
 			st.setString(8, nhanvien.getAvatar());
 			st.setInt(9, nhanvien.getRole());
-			st.setInt(10, nhanvien.getId());
+			st.setInt(10, nhanvien.getStatus());
+			st.setInt(11, nhanvien.getId());
 			st.execute();
 			System.out.println("update Successfully!");
 			return true;
@@ -181,6 +186,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setPassword(rs.getString("password"));
                 nhanvien.setPhone(rs.getString("SDT"));
                 nhanvien.setRole(rs.getInt("role"));
+                nhanvien.setStatus(rs.getInt("status"));
 				list.add(nhanvien);
 			}
 		}catch(Exception ex) {

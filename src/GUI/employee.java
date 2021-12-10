@@ -44,6 +44,7 @@ public class employee extends JPanel {
 	private JButton btnSave;
 	private JComboBox cbFilter;
 	private JButton btnFind;
+	private JComboBox cbStatus;
 	
 	public employee() {
 		setOpaque(false);
@@ -226,13 +227,14 @@ public class employee extends JPanel {
 		lbStatus.setBounds(10, 210, 57, 30);
 		panelEmp.add(lbStatus);
 		
-		JComboBox cbGender_1 = new JComboBox();
-		cbGender_1.setForeground(new Color(25, 25, 112));
-		cbGender_1.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 13));
-		cbGender_1.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		cbGender_1.setBackground(new Color(245, 255, 250));
-		cbGender_1.setBounds(65, 213, 100, 25);
-		panelEmp.add(cbGender_1);
+		cbStatus = new JComboBox();
+		cbStatus.setModel(new DefaultComboBoxModel(new String[] {"Enable", "Disable"}));
+		cbStatus.setForeground(new Color(25, 25, 112));
+		cbStatus.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 13));
+		cbStatus.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		cbStatus.setBackground(new Color(245, 255, 250));
+		cbStatus.setBounds(65, 213, 100, 25);
+		panelEmp.add(cbStatus);
 		
 		JLabel lbDob = new JLabel("DOB");
 		lbDob.setBounds(255, 91, 58, 30);
@@ -322,7 +324,7 @@ public class employee extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		NhanVienController controll = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, canvasAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind);
+		NhanVienController controll = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, canvasAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind, cbStatus);
 
 	}
 }

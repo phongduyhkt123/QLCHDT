@@ -7,25 +7,28 @@ public class NhanVienModel extends PersonModel{
 	private String password;
 	private String avatar;
 	private int role;
+	private int status;
 	
 	public NhanVienModel() {}
 	
 	public NhanVienModel(int id, String name, String gender, Date dob, String phone, String address, String email,
-			String password, String avatar, int role) {
+			String password, String avatar, int role, int status) {
 		super(id, name, gender, dob, phone, address);
 		this.email = email;
 		this.password = password;
 		this.avatar = avatar;
 		this.role = role;
+		this.status = status;
 	}
 	
 	public NhanVienModel(String name, String gender, Date dob, String phone, String address, String email,
-			String password, String avatar, int role) {
+			String password, String avatar, int role, int status) {
 		super(name, gender, dob, phone, address);
 		this.email = email;
 		this.password = password;
 		this.avatar = avatar;
 		this.role = role;
+		this.status = status;
 	}
 	
 	@Override
@@ -56,6 +59,12 @@ public class NhanVienModel extends PersonModel{
 	}
 	public void setRole(int role) {
 		this.role = role;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }
