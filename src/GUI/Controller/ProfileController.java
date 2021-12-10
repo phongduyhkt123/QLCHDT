@@ -178,7 +178,7 @@ public class ProfileController {
 					}
 					else {
 						MyUtils.showInfoMessage("Info", "Update profile success!");
-
+						buttonChangeStats(1);
 					}
 				}
 			}	
