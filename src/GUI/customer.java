@@ -8,10 +8,9 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
-
-import Controller.KhachHangController;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -63,6 +62,14 @@ public class customer extends JPanel {
 		lbID.setBounds(20, 10, 100, 30);
 		panelCus.add(lbID);
 		
+		txfId = new JTextField();
+		txfId.setForeground(new Color(25, 25, 112));
+		txfId.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
+		txfId.setColumns(10);
+		txfId.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		txfId.setBounds(90, 10, 320, 25);
+		panelCus.add(txfId);
+		
 		JLabel lbName = new JLabel("Name");
 		lbName.setForeground(new Color(25, 25, 112));
 		lbName.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
@@ -72,7 +79,7 @@ public class customer extends JPanel {
 		txfName = new JTextField();
 		txfName.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfName.setForeground(new Color(25, 25, 112));
-		txfName.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		txfName.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		txfName.setColumns(10);
 		txfName.setBounds(90, 53, 320, 25);
 		panelCus.add(txfName);
@@ -84,10 +91,10 @@ public class customer extends JPanel {
 		panelCus.add(lbGender);
 		
 		cbGender = new JComboBox();
-		cbGender.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ"}));
+		cbGender.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
 		cbGender.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		cbGender.setBackground(new Color(245, 255, 250));
-		cbGender.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		cbGender.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		cbGender.setForeground(new Color(25, 25, 112));
 		cbGender.setBounds(90, 93, 100, 25);
 		panelCus.add(cbGender);
@@ -117,7 +124,7 @@ public class customer extends JPanel {
 		txfPhone = new JTextField();
 		txfPhone.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfPhone.setForeground(new Color(25, 25, 112));
-		txfPhone.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		txfPhone.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		txfPhone.setColumns(10);
 		txfPhone.setBounds(90, 133, 320, 25);
 		panelCus.add(txfPhone);
@@ -131,7 +138,7 @@ public class customer extends JPanel {
 		txfAddress = new JTextField();
 		txfAddress.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfAddress.setForeground(new Color(25, 25, 112));
-		txfAddress.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		txfAddress.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		txfAddress.setColumns(10);
 		txfAddress.setBounds(90, 173, 320, 25);
 		panelCus.add(txfAddress);
@@ -142,7 +149,7 @@ public class customer extends JPanel {
 		btnAdd.setBackground(new Color(204, 204, 255));
 		btnAdd.setForeground(new Color(25, 25, 112));
 		btnAdd.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnAdd.setBounds(440, 10, 90, 30);
+		btnAdd.setBounds(440, 15, 90, 30);
 		panelCus.add(btnAdd);
 		
 		btnEdit = new JButton("Edit");
@@ -150,7 +157,7 @@ public class customer extends JPanel {
 		btnEdit.setBackground(new Color(204, 204, 255));
 		btnEdit.setForeground(new Color(25, 25, 112));
 		btnEdit.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnEdit.setBounds(440, 50, 90, 30);
+		btnEdit.setBounds(440, 65, 90, 30);
 		panelCus.add(btnEdit);
 		
 		btnCancel = new JButton("Cancel");
@@ -158,7 +165,7 @@ public class customer extends JPanel {
 		btnCancel.setBackground(new Color(204, 204, 255));
 		btnCancel.setForeground(new Color(25, 25, 112));
 		btnCancel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnCancel.setBounds(440, 130, 90, 30);
+		btnCancel.setBounds(440, 115, 90, 30);
 		panelCus.add(btnCancel);
 		
 		btnSave = new JButton("Save");
@@ -166,16 +173,8 @@ public class customer extends JPanel {
 		btnSave.setBackground(new Color(204, 204, 255));
 		btnSave.setForeground(new Color(25, 25, 112));
 		btnSave.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnSave.setBounds(440, 170, 90, 30);
+		btnSave.setBounds(440, 165, 90, 30);
 		panelCus.add(btnSave);
-		
-		txfId = new JTextField();
-		txfId.setForeground(new Color(25, 25, 112));
-		txfId.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-		txfId.setColumns(10);
-		txfId.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		txfId.setBounds(90, 10, 160, 25);
-		panelCus.add(txfId);
 		
 		JLabel lbCusList = new JLabel("CUSTOMER LIST");
 		lbCusList.setHorizontalAlignment(SwingConstants.CENTER);
@@ -185,7 +184,7 @@ public class customer extends JPanel {
 		add(lbCusList);
 
 		cbFilter = new JComboBox();
-		cbFilter.setModel(new DefaultComboBoxModel(new String[] {"ID", "Tên"}));
+		cbFilter.setModel(new DefaultComboBoxModel(new String[] {"ID", "Name"}));
 		cbFilter.setForeground(new Color(25, 25, 112));
 		cbFilter.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		cbFilter.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -210,7 +209,6 @@ public class customer extends JPanel {
 		add(btnFind);
 		
 		JPanel panelCusList = new JPanel();
-		panelCusList.setOpaque(false);
 		panelCusList.setBorder(new LineBorder(new Color(25, 25, 112)));
 		panelCusList.setBackground(new Color(176, 196, 222));
 		panelCusList.setBounds(10, 270, 540, 220);
@@ -218,12 +216,24 @@ public class customer extends JPanel {
 		panelCusList.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 540, 133);
+		scrollPane.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		scrollPane.setBackground(new Color(176, 196, 222));
+		scrollPane.setForeground(new Color(25, 25, 112));
+		scrollPane.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
+		scrollPane.setBounds(0, 0, 540, 220);
 		panelCusList.add(scrollPane);
 		
 		table = new JTable();
+		table.setBackground(new Color(204, 204, 255));
+		table.setForeground(new Color(25, 25, 112));
+		table.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+			}
+		));
 		scrollPane.setViewportView(table);
-		
-		KhachHangController controll = new KhachHangController(txfName, txfPhone, txfAddress, txfFind, txdate, txfId, cbGender, btnAdd, btnEdit, btnCancel, btnSave, cbFilter, btnFind, table);
+
 	}
 }

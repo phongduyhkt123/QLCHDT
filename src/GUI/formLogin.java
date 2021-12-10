@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
@@ -60,12 +61,12 @@ public class formLogin extends JFrame {
 		lbBrand.setBounds(71, 30, 241, 50);
 		mainPanel.add(lbBrand);
 		
-		JRadioButton rdbtnAdmin = new JRadioButton("Admin");
-		rdbtnAdmin.setForeground(new Color(25, 25, 112));
-		rdbtnAdmin.setOpaque(false);
-		rdbtnAdmin.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 15));
-		rdbtnAdmin.setBounds(70, 109, 109, 23);
-		mainPanel.add(rdbtnAdmin);
+		JRadioButton rdbtnManage = new JRadioButton("Manage");
+		rdbtnManage.setForeground(new Color(25, 25, 112));
+		rdbtnManage.setOpaque(false);
+		rdbtnManage.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 15));
+		rdbtnManage.setBounds(70, 109, 109, 23);
+		mainPanel.add(rdbtnManage);
 		
 		JRadioButton rdbtnEmployee = new JRadioButton("Employee");
 		rdbtnEmployee.setOpaque(false);
@@ -73,6 +74,10 @@ public class formLogin extends JFrame {
 		rdbtnEmployee.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 15));
 		rdbtnEmployee.setBounds(200, 109, 109, 23);
 		mainPanel.add(rdbtnEmployee);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnManage);
+		group.add(rdbtnEmployee);
 
 		JLabel lbPhone = new JLabel("Phone");
 		lbPhone.setForeground(new Color(25, 25, 112));

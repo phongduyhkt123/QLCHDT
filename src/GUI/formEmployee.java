@@ -34,6 +34,7 @@ public class formEmployee extends JFrame {
 	}
 	customer fCustomer = new customer();
 	product fProduct =new product();
+	bill fBill =new bill();
 	
 	public formEmployee() {
 		setBackground(new Color(25, 25, 112));
@@ -121,6 +122,12 @@ public class formEmployee extends JFrame {
 		fProduct.setBackground(new Color(235, 255, 250));
 		contentPane.add(fProduct);
 		
+		fBill.setVisible(false);
+		fBill.setOpaque(false);
+		fBill.setBounds(135, 0, 559, 500);
+		fBill.setBackground(new Color(235, 255, 250));
+		contentPane.add(fBill);
+		
 		JLabel bg =new JLabel();
 		bg.setBounds(0,0,700,500);
 		ImageIcon avtload =new ImageIcon(new ImageIcon(this.getClass().getResource("/background.png")).getImage().getScaledInstance(bg.getWidth(),bg.getHeight(), Image.SCALE_SMOOTH));
@@ -140,10 +147,18 @@ public class formEmployee extends JFrame {
 				fProduct.setVisible(true);
 			}
 		});
+		
+		btnBill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Hide();
+				fBill.setVisible(true);
+			}
+		});
 	}
 	
 	void Hide() {
 		fCustomer.setVisible(false);
 		fProduct.setVisible(false);
+		fBill.setVisible(false);
 	}
 }

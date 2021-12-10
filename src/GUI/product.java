@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.SanPhamController;
+//import Controller.SanPhamController;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -65,7 +65,7 @@ public class product extends JPanel {
 		txfID = new JTextField();
 		txfID.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfID.setForeground(new Color(25, 25, 112));
-		txfID.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		txfID.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		txfID.setBounds(90, 13, 320, 25);
 		panelCus.add(txfID);
 		txfID.setColumns(10);
@@ -79,7 +79,7 @@ public class product extends JPanel {
 		txfName = new JTextField();
 		txfName.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfName.setForeground(new Color(25, 25, 112));
-		txfName.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		txfName.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		txfName.setColumns(10);
 		txfName.setBounds(90, 53, 320, 25);
 		panelCus.add(txfName);
@@ -93,7 +93,7 @@ public class product extends JPanel {
 		txfPrice = new JTextField();
 		txfPrice.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfPrice.setForeground(new Color(25, 25, 112));
-		txfPrice.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		txfPrice.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		txfPrice.setColumns(10);
 		txfPrice.setBounds(90, 133, 320, 25);
 		panelCus.add(txfPrice);
@@ -107,7 +107,7 @@ public class product extends JPanel {
 		txfQuantity = new JTextField();
 		txfQuantity.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfQuantity.setForeground(new Color(25, 25, 112));
-		txfQuantity.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		txfQuantity.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		txfQuantity.setColumns(10);
 		txfQuantity.setBounds(90, 93, 320, 25);
 		panelCus.add(txfQuantity);
@@ -164,7 +164,7 @@ public class product extends JPanel {
 		
 		cbID = new JComboBox();
 		cbID.setForeground(new Color(25, 25, 112));
-		cbID.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		cbID.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		cbID.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		cbID.setBackground(new Color(245, 255, 250));
 		cbID.setBounds(89, 173, 321, 25);
@@ -178,7 +178,7 @@ public class product extends JPanel {
 		add(lbProList);
 		
 		cbFilter = new JComboBox();
-		cbFilter.setModel(new DefaultComboBoxModel(new String[] {"ID", "Tên"}));
+		cbFilter.setModel(new DefaultComboBoxModel(new String[] {"ID", "Name"}));
 		cbFilter.setForeground(new Color(25, 25, 112));
 		cbFilter.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		cbFilter.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -215,8 +215,16 @@ public class product extends JPanel {
 		panelProList.add(scrollPane);
 		
 		table = new JTable();
+		table.setForeground(new Color(25, 25, 112));
+		table.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+			}
+		));
 		scrollPane.setViewportView(table);
 		
-		SanPhamController controll = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
+		//SanPhamController controll = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
 	}
 }

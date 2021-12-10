@@ -35,6 +35,8 @@ public class formAdmin extends JFrame {
 	employee fEmployee = new employee();
 	customer fCustomer = new customer();
 	product fProduct = new product();
+	bill fBill = new bill();
+	billHistory fHistory = new billHistory();
 	
 	public formAdmin() {
 		setBackground(new Color(173, 216, 230));
@@ -157,6 +159,20 @@ public class formAdmin extends JFrame {
 		fProduct.setBackground(new Color(235, 255, 250));
 		contentPane.add(fProduct);
 		
+		fBill.setBorder(new LineBorder(new Color(25, 25, 112)));
+		fBill.setVisible(false);
+		fBill.setOpaque(false);
+		fBill.setBounds(135, 0, 559, 500);
+		fBill.setBackground(new Color(235, 255, 250));
+		contentPane.add(fBill);
+		
+		fHistory.setBorder(new LineBorder(new Color(25, 25, 112)));
+		fHistory.setVisible(false);
+		fHistory.setOpaque(false);
+		fHistory.setBounds(135, 0, 559, 500);
+		fHistory.setBackground(new Color(235, 255, 250));
+		contentPane.add(fHistory);
+		
 		JLabel bg =new JLabel();
 		bg.setBounds(0,0,700,500);
 		ImageIcon avtload =new ImageIcon(new ImageIcon(this.getClass().getResource("/background.png")).getImage().getScaledInstance(bg.getWidth(),bg.getHeight(), Image.SCALE_SMOOTH));
@@ -183,6 +199,20 @@ public class formAdmin extends JFrame {
 				fProduct.setVisible(true);
 			}
 		});
+		
+		btnBill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Hide();
+				fBill.setVisible(true);
+			}
+		});
+		
+		btnHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Hide();
+				fHistory.setVisible(true);
+			}
+		});
 
 	}
 	
@@ -190,5 +220,7 @@ public class formAdmin extends JFrame {
 		fEmployee.setVisible(false);
 		fCustomer.setVisible(false);
 		fProduct.setVisible(false);
+		fBill.setVisible(false);
+		fHistory.setVisible(false);
 	}
 }
