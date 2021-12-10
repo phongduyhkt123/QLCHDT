@@ -220,8 +220,9 @@ public class NhanVienController {
 				tableModel.addRow(row);
 			}
 			this.table.setModel(tableModel);
+			this.table.removeColumn(this.table.getColumnModel().getColumn(10));
 		}catch(Exception ex) {
-			System.out.println(ex.getMessage());
+			ex.printStackTrace();
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
 		}
 	}
@@ -240,12 +241,12 @@ public class NhanVienController {
 		cbStatus.setSelectedIndex(table.getValueAt(row, 9).equals("Enable") ? 0: 1);
 
 		avtImg = null;
-		if (((byte[])table.getValueAt(row, 10)).length > 0) {
+		if (((byte[])table.getModel().getValueAt(row, 10)).length > 0) {
 			try {
 				lblAvt.setIcon(
 						new ImageIcon(
 								ImageIO.read(
-										new ByteArrayInputStream((byte[])table.getValueAt(row, 10))).getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), Image.SCALE_SMOOTH)
+										new ByteArrayInputStream((byte[])table.getModel().getValueAt(row, 10))).getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), Image.SCALE_SMOOTH)
 								)
 						);
 			} catch (IOException e) {

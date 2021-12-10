@@ -106,7 +106,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 		try {
 			String sql = 
 			"insert into nhanvien(tenNV, gioiTinh, ngaySinh, SDT, diaChi, email, password, avatar, role, status) "
-			+ "values(?,?,?,?,?,?,?,?,?)";
+			+ "values(?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement st = cnn.prepareStatement(sql);
 			st.setString(1, nhanvien.getName());
 			st.setString(2, nhanvien.getGender());
