@@ -18,12 +18,17 @@ import javax.swing.border.LineBorder;
 public class formAdmin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private employee fEmployee;
+	private customer fCustomer;
+	private product fProduct;
+	private bill fBill;
+	private billHistory fHistory;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					formAdmin frame = new formAdmin();
+					formAdmin frame = new formAdmin(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,13 +37,15 @@ public class formAdmin extends JFrame {
 		});
 	}
 	
-	employee fEmployee = new employee();
-	customer fCustomer = new customer();
-	product fProduct = new product();
-	bill fBill = new bill();
-	billHistory fHistory = new billHistory();
 	
-	public formAdmin() {
+	
+	public formAdmin(Integer userId) {
+		fEmployee = new employee();
+		fCustomer = new customer();
+		fProduct = new product();
+		fBill = new bill(userId);
+		fHistory = new billHistory();
+		
 		setBackground(new Color(173, 216, 230));
 		setTitle("Admin");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -209,6 +216,7 @@ public class formAdmin extends JFrame {
 		btnBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fBill.getController().loadData();
 				fBill.setVisible(true);
 			}
 		});

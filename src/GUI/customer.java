@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
-import Controller.KhachHangController;
+import GUI.Controller.KhachHangController;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;

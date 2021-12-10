@@ -19,12 +19,16 @@ import javax.swing.border.LineBorder;
 public class formEmployee extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private customer fCustomer;
+	private product fProduct;
+	private bill fBill;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					formEmployee frame = new formEmployee();
+					formEmployee frame = new formEmployee(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,11 +36,12 @@ public class formEmployee extends JFrame {
 			}
 		});
 	}
-	customer fCustomer = new customer();
-	product fProduct = new product();
-	bill fBill = new bill();
 	
-	public formEmployee() {
+	public formEmployee(Integer userId) {
+		fCustomer = new customer();
+		fProduct = new product();
+		fBill = new bill(userId);
+		
 		setBackground(new Color(25, 25, 112));
 		setTitle("Employee");
 		setVisible(true);
@@ -155,6 +160,7 @@ public class formEmployee extends JFrame {
 		btnBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fBill.getController().loadData();
 				fBill.setVisible(true);
 			}
 		});

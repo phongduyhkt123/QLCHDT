@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-import Controller.LoginController;
+import GUI.Controller.LoginController;
 
 import javax.swing.JRadioButton;
 

@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.SanPhamController;
+import GUI.Controller.SanPhamController;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -29,10 +29,8 @@ public class product extends JPanel {
 	private JTable table;
 	private JButton btnFind;
 	private JComboBox cbFilter;
-	private JComboBox cbID;
 	private JButton btnSave;
 	private JButton btnCancel;
-	private JButton btnDisable;
 	private JButton btnEdit;
 	private JButton btnAdd;
 
@@ -134,14 +132,6 @@ public class product extends JPanel {
 		btnEdit.setBounds(440, 50, 90, 30);
 		panelCus.add(btnEdit);
 		
-		btnDisable = new JButton("Disable");
-		btnDisable.setForeground(new Color(25, 25, 112));
-		btnDisable.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnDisable.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		btnDisable.setBackground(new Color(204, 204, 255));
-		btnDisable.setBounds(440, 90, 90, 30);
-		panelCus.add(btnDisable);
-		
 		btnCancel = new JButton("Cancel");
 		btnCancel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnCancel.setBackground(new Color(204, 204, 255));
@@ -157,20 +147,6 @@ public class product extends JPanel {
 		btnSave.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		btnSave.setBounds(440, 170, 90, 30);
 		panelCus.add(btnSave);
-		
-		JLabel lbStatus = new JLabel("Status");
-		lbStatus.setForeground(new Color(25, 25, 112));
-		lbStatus.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
-		lbStatus.setBounds(20, 170, 100, 30);
-		panelCus.add(lbStatus);
-		
-		cbID = new  JComboBox();
-		cbID.setForeground(new Color(25, 25, 112));
-		cbID.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
-		cbID.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		cbID.setBackground(new Color(245, 255, 250));
-		cbID.setBounds(89, 173, 321, 25);
-		panelCus.add(cbID);
 		
 		JLabel lbProList = new JLabel("PRODUCT LIST");
 		lbProList.setHorizontalAlignment(SwingConstants.CENTER);
@@ -227,7 +203,7 @@ public class product extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		controller = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
+		controller = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, btnSave, btnCancel, btnEdit, btnAdd);
 	}
 	
 	public SanPhamController getController() {

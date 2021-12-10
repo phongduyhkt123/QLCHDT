@@ -12,13 +12,14 @@ import javax.swing.border.LineBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-import Controller.NhanVienController;
+import GUI.Controller.NhanVienController;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import java.awt.Canvas;
 import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -288,6 +289,7 @@ public class employee extends JPanel {
 		lblAvt = new JLabel("");
 		lblAvt.setBounds(5, 10, 90, 116);
 		lblAvt.setBackground(new Color(245, 255, 250));
+		lblAvt.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		panelEmp.add(lblAvt);
 		
 		JPanel panelEmpList = new JPanel();
@@ -317,7 +319,7 @@ public class employee extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		controller = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, lblAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind, cbStatus);
+		controller = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, lblAvt, btnUpload, btnAdd, btnEdit, btnCancel, btnSave, cbFilter, btnFind, cbStatus);
 	}
 	
 	public NhanVienController getController() {

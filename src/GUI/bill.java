@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.HoaDonChiTietController;
+import GUI.Controller.HoaDonChiTietController;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -34,8 +34,9 @@ public class bill extends JPanel {
 	private JButton btnCancel;
 	private JButton btnPay;
 	private JButton btnDel;
-	
-	public bill() {
+	private HoaDonChiTietController controller;
+
+	public bill(Integer userId) {
 		setOpaque(false);
 		setBorder(new LineBorder(new Color(25, 25, 112)));
 		setBackground(new Color(235, 255, 250));
@@ -182,13 +183,13 @@ public class bill extends JPanel {
 		table.setBackground(new Color(204, 204, 255));
 		table.setForeground(new Color(25, 25, 112));
 		table.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "T\u00EAn S\u1EA3n Ph\u1EA9m", "Gi\u00E1", "S\u1ED1 l\u01B0\u1EE3ng"
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"ID", "Product name", "Price", "Quantity"}) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return super.isCellEditable(row, column);
 			}
-		));
+		});
 		scrollPane.setViewportView(table);
 		
 		JLabel lbTotalPrice = new JLabel("Total Price");
@@ -222,7 +223,14 @@ public class bill extends JPanel {
 		btnDel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnDel.setBackground(new Color(204, 204, 255));
 		
-		HoaDonChiTietController controll = new HoaDonChiTietController(txfPrice, txfPrice, txfQuantity, txfPrice, txfPhone, txfAddress, txfTotal, table, cbCus, cbPro, btnAdd, btnCancel, btnPay, btnDel);
+		controller = new HoaDonChiTietController(userId, txfPrice, txfPrice, txfQuantity, txfPrice, txfPhone, txfAddress, txfTotal, table, cbCus, cbPro, btnAdd, btnCancel, btnPay, btnDel);
 	}
 	
+	public HoaDonChiTietController getController() {
+		return controller;
+	}
+
+	public void setController(HoaDonChiTietController controller) {
+		this.controller = controller;
+	}
 }
