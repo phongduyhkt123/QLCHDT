@@ -39,14 +39,14 @@ public class employee extends JPanel {
 	private JButton btnUpload;
 	private JButton btnAdd;
 	private JButton btnEdit;
-	private JButton btnDisable;
 	private JButton btnCancel;
 	private JButton btnSave;
 	private JComboBox cbFilter;
-	private JButton btnFind;
 	private JComboBox cbStatus;
 	private NhanVienController controller;
 
+	private JButton btnFind;
+	
 	public employee() {
 		setOpaque(false);
 		setBorder(new LineBorder(new Color(25, 25, 112)));
@@ -186,23 +186,15 @@ public class employee extends JPanel {
 		btnAdd.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		
 		btnEdit = new JButton("Edit");
-		btnEdit.setBounds(440, 60, 90, 30);
+		btnEdit.setBounds(440, 75, 90, 30);
 		panelEmp.add(btnEdit);
 		btnEdit.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnEdit.setBackground(new Color(204, 204, 255));
 		btnEdit.setForeground(new Color(25, 25, 112));
 		btnEdit.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		
-		btnDisable = new JButton("Disable");
-		btnDisable.setBounds(440, 110, 90, 30);
-		panelEmp.add(btnDisable);
-		btnDisable.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		btnDisable.setBackground(new Color(204, 204, 255));
-		btnDisable.setForeground(new Color(25, 25, 112));
-		btnDisable.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		
 		btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(440, 160, 90, 30);
+		btnCancel.setBounds(440, 145, 90, 30);
 		panelEmp.add(btnCancel);
 		btnCancel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnCancel.setBackground(new Color(204, 204, 255));
