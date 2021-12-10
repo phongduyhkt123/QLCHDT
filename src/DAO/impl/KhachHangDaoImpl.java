@@ -80,7 +80,7 @@ public class KhachHangDaoImpl implements KhachHangDao{
 	
 	public boolean update(KhachHangModel khachhang) {	
 		try {
-			String sql = "update khachhang set tenNV=? , gioiTinh=?, ngaySinh=?, SDT=?, diaChi=? where idKH=?";
+			String sql = "update khachhang set tenKH=? , gioiTinh=?, ngaySinh=?, SDT=?, diaChi=? where idKH=?";
 			PreparedStatement st = cnn.prepareStatement(sql);
 			st.setString(1, khachhang.getName());
 			st.setString(2, khachhang.getGender());

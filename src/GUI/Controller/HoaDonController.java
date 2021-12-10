@@ -120,7 +120,7 @@ public class HoaDonController {
 		
 		try {
 			for (HoaDonModel hoadon : list) {
-				Object[] row = {hoadon.getId(), hoadon.getIdNV(), hoadon.getIdKH(), hoadon.getCreateDate(), hoadon.getTotalPrice()};
+				Object[] row = {hoadon.getId(), hoadon.getIdNV(), hoadon.getIdKH(), hoadon.getCreateDate(), String.format("%.0f", hoadon.getTotalPrice())};
 				tableModel.addRow(row);
 			}
 			this.tableHistory.setModel(tableModel);
@@ -140,8 +140,9 @@ public class HoaDonController {
 		};
 		
 		try {
+			
 			for (HoaDonChiTietModel hdct : list) {
-				Object[] row = {hdct.getIdHD(), hdct.getIdSP(), hdct.getPrice(), hdct.getQuantity()};
+				Object[] row = {hdct.getIdHD(), hdct.getIdSP(), String.format("%.0f", hdct.getPrice()), hdct.getQuantity()};
 				tableModel.addRow(row);
 			}
 			this.tableDetail.setModel(tableModel);

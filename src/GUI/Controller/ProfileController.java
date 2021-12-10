@@ -128,6 +128,7 @@ public class ProfileController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buttonChangeStats(2);
+				enableChangePw(0);
 			}
 		});
 		
@@ -153,13 +154,14 @@ public class ProfileController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				enableChangePw(1);
+				buttonChangeStats(1);
 			}
 		});
 		
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int input = JOptionPane.showConfirmDialog(null, "Do you want to update your information?");
+				int input = JOptionPane.showConfirmDialog(null, "Do you want to update your information?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (input == 0) {
 					NhanVienModel nhanvien = dao.getById(userId);
 					if(!dao.update(new NhanVienModel(Integer.parseInt(txfID.getText()),

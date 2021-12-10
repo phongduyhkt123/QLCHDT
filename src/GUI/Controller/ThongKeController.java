@@ -177,11 +177,12 @@ public class ThongKeController {
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File", "txt");
 		chooser.setFileFilter(filter);
-		String path = chooser.getSelectedFile().getAbsolutePath() + ".txt";
+		
 		
         int returnVal = chooser.showSaveDialog(null);
         
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+        	String path = chooser.getSelectedFile().getAbsolutePath() + ".txt";
         	try {
         		Files.write(Paths.get(path), msg.getBytes());
         		MyUtils.showInfoMessage("Information", "Saved report to " + path);
@@ -199,11 +200,11 @@ public class ThongKeController {
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text File", "txt");
 		chooser.setFileFilter(filter);
-		String path = chooser.getSelectedFile().getAbsolutePath() + ".txt";
 		
         int returnVal = chooser.showSaveDialog(null);
         
         if(returnVal == JFileChooser.APPROVE_OPTION) {
+        	String path = chooser.getSelectedFile().getAbsolutePath() + ".txt";
         	try {
         		Files.write(Paths.get(path), msg.getBytes());
         		MyUtils.showInfoMessage("Information", "Saved report to " + path);

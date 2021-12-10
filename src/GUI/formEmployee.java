@@ -170,6 +170,7 @@ public class formEmployee extends JFrame {
 		btnHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fHistory.getController().loadData();
 				fHistory.setVisible(true);
 			}
 		});

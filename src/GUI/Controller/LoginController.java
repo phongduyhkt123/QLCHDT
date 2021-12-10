@@ -56,6 +56,8 @@ public class LoginController {
 	    					        }
 	    					    });
 	    						form.setVisible(false);
+	    						txfUsername.setText("");
+	    						passwordField.setText("");
 	    					} else if (rdbtnEmployee.isSelected() && nhanvien.getRole() == 2) {
 	    						new formEmployee(nhanvien.getId()).addWindowListener(new java.awt.event.WindowAdapter() {
 	    					        @Override
@@ -64,6 +66,8 @@ public class LoginController {
 	    					        }
 	    					    });
 	    						form.setVisible(false);
+	    						txfUsername.setText("");
+	    						passwordField.setText("");
 	    					} else {
 	    						MyUtils.showErrorMessage("Login error" , "You have selected wrong account type!");
 	    					}

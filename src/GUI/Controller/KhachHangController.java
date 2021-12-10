@@ -115,12 +115,17 @@ public class KhachHangController {
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (txdate.getDate() == null || txdate.getDate() == null) {
+					MyUtils.showErrorMessage("Error", "Please choose date of birth!");
+					return;
+				}
+				
 				if (mode == 1) {
-					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new customer?");
+					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new customer?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
 						dao.insert(new KhachHangModel(
 								txfName.getText(),
-								cbGender.getSelectedIndex() == 0? "Nam": "Nữ",
+								cbGender.getSelectedIndex() == 0? "Male": "Female",
 								new Date(txdate.getDate().getTime()),// dob
 								txfPhone.getText(),
 								txfAddress.getText()
@@ -130,11 +135,11 @@ public class KhachHangController {
 					}
 
 				}else if (mode == 2) {
-					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this customer infomation?");
+					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this customer infomation?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
 						dao.update(new KhachHangModel(Integer.parseInt(txfId.getText()),
 								txfName.getText(),
-								cbGender.getSelectedIndex() == 0? "Nam": "Nữ",
+								cbGender.getSelectedIndex() == 0? "Male": "Female",
 								new Date(txdate.getDate().getTime()),// dob
 								txfPhone.getText(),
 								txfAddress.getText()
@@ -176,7 +181,7 @@ public class KhachHangController {
 		int row = table.getSelectedRow();
 		txfId.setText(table.getValueAt(row, 0).toString());
 		txfName.setText(table.getValueAt(row, 1).toString());
-		cbGender.setSelectedIndex(table.getValueAt(row, 2).equals("Nam") ? 0: 1);
+		cbGender.setSelectedIndex(table.getValueAt(row, 2).equals("Male") ? 0: 1);
 		txdate.setDate((java.util.Date) table.getValueAt(row, 3));
 		txfPhone.setText(table.getValueAt(row, 4).toString());
 		txfAddress.setText(table.getValueAt(row, 5).toString());

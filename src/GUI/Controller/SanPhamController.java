@@ -109,7 +109,7 @@ public class SanPhamController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (mode == 1) {
-					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new product?");
+					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new product?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
 						dao.insert(new SanPhamModel(
 								txfName.getText(),
@@ -121,7 +121,7 @@ public class SanPhamController {
 					}
 
 				}else if (mode == 2) {
-					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this product's information?");
+					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this product's information?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
 						dao.update(new SanPhamModel(Integer.parseInt(txfID.getText()),
 								txfName.getText(),
@@ -146,7 +146,7 @@ public class SanPhamController {
 		};
 		try {
 			for (SanPhamModel sanpham : list) {
-				Object[] row = {sanpham.getId(), sanpham.getName(), sanpham.getPrice(), sanpham.getQuantity()};
+				Object[] row = {sanpham.getId(), sanpham.getName(), String.format("%.0f", sanpham.getPrice()), sanpham.getQuantity()};
 				tableModel.addRow(row);
 			}
 			this.table.setModel(tableModel);

@@ -89,7 +89,7 @@ public class HoaDonChiTietController {
 	
 	public void loadData() {
 		txfQuantity.setText("");
-		txfTotal.setText("0.0");
+		txfTotal.setText("0");
 		loadCmbCustomer();
 		loadCmbProduct();
 	}
@@ -107,7 +107,6 @@ public class HoaDonChiTietController {
 			public void itemStateChanged(ItemEvent arg0) {
 				if (isLoading)
 					return;
-				
 				loadProductInfo();
 			}
 		});
@@ -126,6 +125,7 @@ public class HoaDonChiTietController {
 				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 				tableModel.removeRow(row);
 				table.setModel(tableModel);
+				showTotalPrice();
 			}
 		});
 		
@@ -156,7 +156,7 @@ public class HoaDonChiTietController {
 		cbCus.removeAllItems();
 		List<KhachHangModel> list = cDao.getAll();
 		for (KhachHangModel khachhang : list) {
-			cbCus.addItem(khachhang); // load customer name -- by override toString
+			cbCus.addItem(khachhang);
 		}
 		txfPhone.setText("");
 		txfAddress.setText("");
@@ -186,8 +186,7 @@ public class HoaDonChiTietController {
 	
 	private void loadProductInfo() {
 		SanPhamModel sanpham = (SanPhamModel)cbPro.getSelectedItem();
-		txfPrice.setText(String.valueOf(sanpham.getPrice()));
-//		txfQuantity.setText(String.valueOf(sanpham.getQuantity()));
+		txfPrice.setText(String.format("%.0f", sanpham.getPrice()));
 	}
 	
 	private void addToTable() {
@@ -208,7 +207,7 @@ public class HoaDonChiTietController {
 			boolean exist = false;
 			for (int i =0; i< tableModel.getRowCount(); i++) {
 				if(tableModel.getValueAt(i, 1).equals(name)) {
-					int choose = JOptionPane.showConfirmDialog(null, "The product has been selected. Do you want to update its quantity?", "Information", JOptionPane.INFORMATION_MESSAGE);
+					int choose = JOptionPane.showConfirmDialog(null, "The product has been selected. Do you want to update its quantity?", "Information", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 					if (choose == 0) {
 						tableModel.setValueAt(quantity, i, 3);
 					}
@@ -220,6 +219,7 @@ public class HoaDonChiTietController {
 				tableModel.addRow(row);
 			}
 			this.table.setModel(tableModel);
+			txfQuantity.setText("");
 			showTotalPrice();
 		}
 		catch (NumberFormatException numex) {
@@ -239,7 +239,8 @@ public class HoaDonChiTietController {
 				total += Double.parseDouble(tableModel.getValueAt(i, 2).toString()) 
 						* Double.parseDouble(tableModel.getValueAt(i, 3).toString());
 			}
-			txfTotal.setText(String.valueOf(total));
+			
+			txfTotal.setText(String.valueOf(String.format("%.0f", total)));
 		}catch(Exception ex) {
 			ex.printStackTrace();
 			MyUtils.showErrorMessage("Error", ex.getMessage());
@@ -276,6 +277,8 @@ public class HoaDonChiTietController {
 			}
 			loadCmbProduct();
 			clearTable();
+			txfQuantity.setText("");
+			txfTotal.setText("0");
 			MyUtils.showInfoMessage("Information", "Create bill successfully!");
 		}catch(Exception ex) {
 			ex.printStackTrace();

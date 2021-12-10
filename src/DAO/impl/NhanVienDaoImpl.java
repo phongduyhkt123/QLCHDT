@@ -133,11 +133,18 @@ public class NhanVienDaoImpl implements NhanVienDao{
 		return false;
 	}
 	
-	public boolean update(NhanVienModel nhanvien) {	
+	public boolean update(NhanVienModel nhanvien) {
+		String sql;
+		if (nhanvien.getAvatar().length == 0) {
+			sql = "update nhanvien set tenNV=? , gioiTinh=?, ngaySinh=?, SDT=?, diaChi=?, email=?, password=?, role=?, status=?"
+					+ " where idNV=?";
+		}
+		else {
+			sql = "update nhanvien set tenNV=? , gioiTinh=?, ngaySinh=?, SDT=?, diaChi=?, email=?, password=?, role=?, status=?, avatar=?"
+					+ " where idNV=?";
+		}
 		try {
-			String sql = 
-			"update nhanvien set tenNV=? , gioiTinh=?, ngaySinh=?, SDT=?, diaChi=?, email=?, password=?, avatar=?, role=?, status=?"
-			+ " where idNV=?";
+			
 			PreparedStatement st = cnn.prepareStatement(sql);
 			st.setString(1, nhanvien.getName());
 			st.setString(2, nhanvien.getGender());
@@ -146,20 +153,21 @@ public class NhanVienDaoImpl implements NhanVienDao{
 			st.setString(5, nhanvien.getAddress());
 			st.setString(6, nhanvien.getEmail());
 			st.setString(7, nhanvien.getPassword());
+			st.setInt(8, nhanvien.getRole());
+			st.setInt(9, nhanvien.getStatus());
 			
 			if (nhanvien.getAvatar().length > 0) {
-				st.setBlob(8, new SerialBlob(nhanvien.getAvatar()));
+				st.setBlob(10, new SerialBlob(nhanvien.getAvatar()));
+				st.setInt(11, nhanvien.getId());
 			}
 			else {
-				st.setNull(8, java.sql.Types.BLOB);
+				st.setInt(10, nhanvien.getId());
 			}
-			
-			st.setInt(9, nhanvien.getRole());
-			st.setInt(10, nhanvien.getStatus());
-			st.setInt(11, nhanvien.getId());
+
 			st.execute();
 			return true;
-		}catch(Exception ex) {
+		}
+		catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		return false;

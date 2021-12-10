@@ -168,12 +168,17 @@ public class NhanVienController {
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (txdate.getDate() == null || txdate.getDate() == null) {
+					MyUtils.showErrorMessage("Error", "Please choose date of birth!");
+					return;
+				}
+				
 				if (mode == 1) {
-					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new employee?");
+					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new employee?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
 						dao.insert(new NhanVienModel(
 								txfName.getText(),
-								cbGender.getSelectedIndex() == 0? "Nam": "Nữ",
+								cbGender.getSelectedIndex() == 0? "Male": "Female",
 								new Date(txdate.getDate().getTime()),// dob
 								txfPhone.getText(),
 								txfAddress.getText(),
@@ -188,11 +193,11 @@ public class NhanVienController {
 					}
 
 				}else if (mode == 2) {
-					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this employee's information?");
+					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this employee's information?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
 						dao.update(new NhanVienModel(Integer.parseInt(txfID.getText()),
 								txfName.getText(),
-								cbGender.getSelectedIndex() == 0? "Nam": "Nữ",
+								cbGender.getSelectedIndex() == 0? "Male": "Female",
 								new Date(txdate.getDate().getTime()),// dob
 								txfPhone.getText(),
 								txfAddress.getText(),
@@ -223,7 +228,7 @@ public class NhanVienController {
 			for (NhanVienModel nhanvien : list) {
 				Object[] row = {nhanvien.getId(), nhanvien.getName(), nhanvien.getGender(), nhanvien.getDob(), 
 						nhanvien.getPhone(), nhanvien.getAddress(), nhanvien.getEmail(), nhanvien.getRole() == 1?"Manager":"Employee",
-						nhanvien.getPassword(), nhanvien.getStatus() == 1?"Enabled":"Disabled", nhanvien.getAvatar()};
+						nhanvien.getPassword(), nhanvien.getStatus() == 1 ? "Enabled" : "Disabled", nhanvien.getAvatar()};
 				tableModel.addRow(row);
 			}
 			this.table.setModel(tableModel);
@@ -248,7 +253,7 @@ public class NhanVienController {
 		txfEmail.setText(table.getValueAt(row, 6).toString());
 		cbRole.setSelectedIndex(table.getValueAt(row, 7).equals("Manager") ? 0: 1);
 		txfPasswd.setText(table.getValueAt(row, 8).toString());
-		cbStatus.setSelectedIndex(table.getValueAt(row, 9).equals("Enable") ? 0: 1);
+		cbStatus.setSelectedIndex(table.getValueAt(row, 9).equals("Enabled") ? 0: 1);
 
 		avtImg = null;
 		if (((byte[])table.getModel().getValueAt(row, 10)).length > 0) {
