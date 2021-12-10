@@ -88,7 +88,7 @@ CREATE TABLE `khachhang` (
   `SDT` varchar(45) DEFAULT NULL,
   `diaChi` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idKH`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,6 +97,7 @@ CREATE TABLE `khachhang` (
 
 LOCK TABLES `khachhang` WRITE;
 /*!40000 ALTER TABLE `khachhang` DISABLE KEYS */;
+INSERT INTO `khachhang` VALUES (1,'Phạm Cận','Nam','2001-11-18','4560483','Cầu Ngang');
 /*!40000 ALTER TABLE `khachhang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,8 +119,9 @@ CREATE TABLE `nhanvien` (
   `password` varchar(45) NOT NULL,
   `avatar` varchar(45) DEFAULT NULL,
   `role` int NOT NULL,
+  `status` int DEFAULT '1',
   PRIMARY KEY (`idNV`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +130,7 @@ CREATE TABLE `nhanvien` (
 
 LOCK TABLES `nhanvien` WRITE;
 /*!40000 ALTER TABLE `nhanvien` DISABLE KEYS */;
-INSERT INTO `nhanvien` VALUES (1,'Phạm Phong Duy','Nam','2001-11-10','0832780143','Trà Vinh','duy@gmail','1',NULL,1);
+INSERT INTO `nhanvien` VALUES (1,'Phạm Phong Duy','Nam','2001-11-09','0832780144','Trà Vinh','duy@gmail.vn','2',NULL,1,1),(2,'Phạm Phong Cận','Nữ',NULL,'0832780142','Cần Thơ','duy@gmail.com','2',NULL,2,1);
 /*!40000 ALTER TABLE `nhanvien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,8 +146,9 @@ CREATE TABLE `sanpham` (
   `tenSP` varchar(45) NOT NULL,
   `donGia` float DEFAULT NULL,
   `soLuong` int DEFAULT NULL,
+  `status` int DEFAULT '1',
   PRIMARY KEY (`idSP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,6 +157,7 @@ CREATE TABLE `sanpham` (
 
 LOCK TABLES `sanpham` WRITE;
 /*!40000 ALTER TABLE `sanpham` DISABLE KEYS */;
+INSERT INTO `sanpham` VALUES (1,'Iphone 5',50,200,1);
 /*!40000 ALTER TABLE `sanpham` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -166,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-09 19:52:31
+-- Dump completed on 2021-12-10  8:52:53
