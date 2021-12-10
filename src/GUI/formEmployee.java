@@ -22,7 +22,8 @@ public class formEmployee extends JFrame {
 	private customer fCustomer;
 	private product fProduct;
 	private bill fBill;
-	
+	private billHistory fHistory;
+	private profile fProfile;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -41,6 +42,8 @@ public class formEmployee extends JFrame {
 		fCustomer = new customer();
 		fProduct = new product();
 		fBill = new bill(userId);
+		fHistory = new billHistory();
+		fProfile = new profile();
 		
 		setBackground(new Color(25, 25, 112));
 		setTitle("Employee");
@@ -105,7 +108,7 @@ public class formEmployee extends JFrame {
 		btnProfile.setForeground(new Color(25, 25, 112));
 		btnProfile.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 16));
 		btnProfile.setBackground(new Color(176, 196, 222));
-		btnProfile.setBounds(10, 230, 115, 35);
+		btnProfile.setBounds(10, 280, 115, 35);
 		panel.add(btnProfile);
 		
 		JButton btnLogOut = new JButton("Log out");
@@ -116,6 +119,15 @@ public class formEmployee extends JFrame {
 		btnLogOut.setBackground(new Color(176, 196, 222));
 		btnLogOut.setBounds(10, 440, 115, 35);
 		panel.add(btnLogOut);
+		
+		JButton btnReport = new JButton("Report");
+		btnReport.setOpaque(false);
+		btnReport.setForeground(new Color(25, 25, 112));
+		btnReport.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 16));
+		btnReport.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		btnReport.setBackground(new Color(176, 196, 222));
+		btnReport.setBounds(10, 230, 115, 35);
+		panel.add(btnReport);
 		
 		fCustomer.setVisible(false);
 		fCustomer.setOpaque(false);
@@ -134,6 +146,18 @@ public class formEmployee extends JFrame {
 		fBill.setBounds(135, 0, 559, 500);
 		fBill.setBackground(new Color(235, 255, 250));
 		contentPane.add(fBill);
+		
+		fHistory.setVisible(false);
+		fHistory.setOpaque(false);
+		fHistory.setBounds(135, 0, 559, 500);
+		fHistory.setBackground(new Color(235, 255, 250));
+		contentPane.add(fHistory);
+		
+		fProfile.setVisible(false);
+		fProfile.setOpaque(false);
+		fProfile.setBounds(135, 0, 559, 500);
+		fProfile.setBackground(new Color(235, 255, 250));
+		contentPane.add(fProfile);		
 		
 		JLabel bg =new JLabel();
 		bg.setBounds(0,0,700,500);
@@ -165,10 +189,17 @@ public class formEmployee extends JFrame {
 			}
 		});
 		
+		btnHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Hide();
+				fHistory.setVisible(true);
+			}
+		});
+		
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
-				
+				fProfile.setVisible(true);
 			}
 		});
 		
@@ -183,5 +214,7 @@ public class formEmployee extends JFrame {
 		fCustomer.setVisible(false);
 		fProduct.setVisible(false);
 		fBill.setVisible(false);
+		fHistory.setVisible(false);
+		fProfile.setVisible(false);
 	}
 }

@@ -119,7 +119,7 @@ public class bill extends JPanel {
 		lbPrice.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
 		
 		txfPrice = new JTextField();
-		txfPrice.setBounds(115, 133, 270, 25);
+		txfPrice.setBounds(115, 133, 415, 25);
 		panelCus.add(txfPrice);
 		txfPrice.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfPrice.setForeground(new Color(25, 25, 112));
@@ -133,7 +133,7 @@ public class bill extends JPanel {
 		lbQuantity.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
 		
 		txfQuantity = new JTextField();
-		txfQuantity.setBounds(115, 173, 270, 25);
+		txfQuantity.setBounds(115, 173, 315, 25);
 		panelCus.add(txfQuantity);
 		txfQuantity.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfQuantity.setForeground(new Color(25, 25, 112));
@@ -141,21 +141,13 @@ public class bill extends JPanel {
 		txfQuantity.setColumns(10);
 		
 		btnAdd = new JButton("Add");
-		btnAdd.setBounds(417, 130, 90, 30);
+		btnAdd.setBounds(440, 170, 90, 30);
 		panelCus.add(btnAdd);
 		btnAdd.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnAdd.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnAdd.setBackground(new Color(204, 204, 255));
 		btnAdd.setForeground(new Color(25, 25, 112));
 		btnAdd.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		
-		btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(417, 170, 90, 30);
-		panelCus.add(btnCancel);
-		btnCancel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		btnCancel.setBackground(new Color(204, 204, 255));
-		btnCancel.setForeground(new Color(25, 25, 112));
-		btnCancel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		
 		JLabel lbBillDetail = new JLabel("BILL DETAIL");
 		lbBillDetail.setHorizontalAlignment(SwingConstants.CENTER);
@@ -208,7 +200,7 @@ public class bill extends JPanel {
 		add(txfTotal);
 		
 		btnPay = new JButton("Pay");
-		btnPay.setBounds(460, 460, 90, 30);
+		btnPay.setBounds(480, 460, 70, 30);
 		add(btnPay);
 		btnPay.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnPay.setBackground(new Color(204, 204, 255));
@@ -216,12 +208,20 @@ public class bill extends JPanel {
 		btnPay.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		
 		btnDel = new JButton("Delete");
-		btnDel.setBounds(360, 460, 90, 30);
+		btnDel.setBounds(400, 460, 70, 30);
 		add(btnDel);
 		btnDel.setForeground(new Color(25, 25, 112));
 		btnDel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		btnDel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnDel.setBackground(new Color(204, 204, 255));
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(320, 460, 70, 30);
+		add(btnCancel);
+		btnCancel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		btnCancel.setBackground(new Color(204, 204, 255));
+		btnCancel.setForeground(new Color(25, 25, 112));
+		btnCancel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		
 		controller = new HoaDonChiTietController(userId, txfPrice, txfPrice, txfQuantity, txfPrice, txfPhone, txfAddress, txfTotal, table, cbCus, cbPro, btnAdd, btnCancel, btnPay, btnDel);
 	}
