@@ -1,10 +1,15 @@
 package Controller;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
@@ -13,8 +18,13 @@ import DAL.NhanVienDao;
 import DAL.ImplDao.NhanVienDaoImpl;
 
 import java.awt.Canvas;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,7 +44,7 @@ public class NhanVienController {
 	private JTable table;
 	private JComboBox cbRole;
 	private JComboBox cbGender;
-	private Canvas canvasAvt;
+	private JLabel lblAvt;
 	private JButton btnUpload;
 	private JButton btnAdd;
 	private JButton btnEdit;
@@ -46,12 +56,11 @@ public class NhanVienController {
 	private JComboBox cbStatus;
     private NhanVienDao dao;
     private int mode;
-    
-    
+    private byte[] avtImg = null;
     
     public NhanVienController(JTextField txfID, JTextField txfName, JTextField txfPhone, JTextField txfAddress,
 			JTextField txfEmail, JTextField txfPasswd, JTextField txfFind, JDateChooser txdate, JTable table,
-			JComboBox cbRole, JComboBox cbGender, Canvas canvasAvt, JButton btnUpload, JButton btnAdd, JButton btnEdit,
+			JComboBox cbRole, JComboBox cbGender, JLabel lblAvt, JButton btnUpload, JButton btnAdd, JButton btnEdit,
 			JButton btnDisable, JButton btnCancel, JButton btnSave, JComboBox cbFilter, JButton btnFind, JComboBox cbStatus) {
 		super();
 		this.txfID = txfID;
@@ -65,7 +74,7 @@ public class NhanVienController {
 		this.table = table;
 		this.cbRole = cbRole;
 		this.cbGender = cbGender;
-		this.canvasAvt = canvasAvt;
+		this.lblAvt = lblAvt;
 		this.btnUpload = btnUpload;
 		this.btnAdd = btnAdd;
 		this.btnEdit = btnEdit;
@@ -86,6 +95,31 @@ public class NhanVienController {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				loadRow();
+			}
+		});
+		
+		btnUpload.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+		                "Images", "jpg", "gif", "png");
+				chooser.setFileFilter(filter);
+		        int returnVal = chooser.showOpenDialog(null);
+		        
+		        if(returnVal == JFileChooser.APPROVE_OPTION) {
+		        	try {
+						avtImg = Files.readAllBytes(Paths.get(chooser.getSelectedFile().getAbsolutePath()));
+						lblAvt.setIcon(
+								new ImageIcon(
+										ImageIO.read(
+												new ByteArrayInputStream(avtImg)).getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), Image.SCALE_SMOOTH)
+										)
+								);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+		        }
 			}
 		});
 		
@@ -145,7 +179,7 @@ public class NhanVienController {
 								txfAddress.getText(),
 								txfEmail.getText(),
 								txfPasswd.getText(),
-								null,
+								avtImg,
 								cbRole.getSelectedIndex()+1,
 								cbStatus.getSelectedIndex() == 0? 1: 0
 								));
@@ -164,7 +198,7 @@ public class NhanVienController {
 								txfAddress.getText(),
 								txfEmail.getText(),
 								txfPasswd.getText(),
-								null,
+								avtImg,
 								cbRole.getSelectedIndex()+1,
 								cbStatus.getSelectedIndex() == 0? 1: 0
 								));
@@ -177,13 +211,13 @@ public class NhanVienController {
     }
 
 	public void loadTable(List<NhanVienModel> list) {
-		String[] labels= {"ID", "Tên Nhân Viên", "Giới tính", "Ngày sinh", "Điện thoại", "Địa chỉ", "Email", "Chức vụ", "Password", "Avatar", "Trạng thái"};
+		String[] labels= {"ID", "Tên Nhân Viên", "Giới tính", "Ngày sinh", "Điện thoại", "Địa chỉ", "Email", "Chức vụ", "Password", "Trạng thái", "avt"};
 		DefaultTableModel tableModel = new DefaultTableModel(labels, 0);
 		try {
 			for (NhanVienModel nhanvien : list) {
 				Object[] row = {nhanvien.getId(), nhanvien.getName(), nhanvien.getGender(), nhanvien.getDob(), 
 						nhanvien.getPhone(), nhanvien.getAddress(), nhanvien.getEmail(), nhanvien.getRole() == 1?"Quản lý":"Nhân viên",
-						nhanvien.getPassword(), nhanvien.getAvatar(), nhanvien.getStatus() == 1?"Enable":"Disable"};
+						nhanvien.getPassword(), nhanvien.getStatus() == 1?"Enable":"Disable", nhanvien.getAvatar()};
 				tableModel.addRow(row);
 			}
 			this.table.setModel(tableModel);
@@ -204,7 +238,24 @@ public class NhanVienController {
 		txfEmail.setText(table.getValueAt(row, 6).toString());
 		cbRole.setSelectedIndex(table.getValueAt(row, 7).equals("Quản lý") ? 0: 1);
 		txfPasswd.setText(table.getValueAt(row, 8).toString());
-		cbStatus.setSelectedIndex(table.getValueAt(row, 10).equals("Enable") ? 0: 1);
+		cbStatus.setSelectedIndex(table.getValueAt(row, 9).equals("Enable") ? 0: 1);
+
+		avtImg = null;
+		if (((byte[])table.getValueAt(row, 10)).length > 0) {
+			try {
+				lblAvt.setIcon(
+						new ImageIcon(
+								ImageIO.read(
+										new ByteArrayInputStream((byte[])table.getValueAt(row, 10))).getScaledInstance(lblAvt.getWidth(), lblAvt.getHeight(), Image.SCALE_SMOOTH)
+								)
+						);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			lblAvt.setIcon(null);
+		}
 	}
 	
 	public void buttonChangeStats(int stat) {
@@ -214,12 +265,14 @@ public class NhanVienController {
 			btnDisable.setEnabled(true);
 			btnSave.setEnabled(false);
 			btnCancel.setEnabled(false);
+			btnUpload.setEnabled(false);
 		}else {
 			btnAdd.setEnabled(false);
 			btnEdit.setEnabled(false);
 			btnDisable.setEnabled(false);
 			btnSave.setEnabled(true);
 			btnCancel.setEnabled(true);
+			btnUpload.setEnabled(true);
 		}
 	}
 	
