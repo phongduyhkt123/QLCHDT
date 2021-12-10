@@ -45,9 +45,9 @@ public class formAdmin extends JFrame {
 		fCustomer = new customer();
 		fProduct = new product();
 		fBill = new bill(userId);
-		fHistory = new billHistory();
+		fHistory = new billHistory(0);
 		fStatis = new statis();
-		fProfile = new profile();
+		fProfile = new profile(userId);
 		
 		setBackground(new Color(173, 216, 230));
 		setTitle("Admin");

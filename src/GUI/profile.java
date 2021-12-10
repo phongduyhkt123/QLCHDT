@@ -12,11 +12,14 @@ import javax.swing.border.LineBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import GUI.Controller.ProfileController;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Canvas;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPasswordField;
+import javax.swing.BorderFactory;
 
 public class profile extends JPanel {	
 	private static final long serialVersionUID = 1L;
@@ -28,7 +31,6 @@ public class profile extends JPanel {
 	private JDateChooser txdate;
 	private JComboBox cbRole;
 	private JComboBox cbGender;
-	private Canvas canvasAvt;
 	private JButton btnUpload;
 	private JButton btnEdit;
 	private JButton btnCancel;
@@ -37,8 +39,14 @@ public class profile extends JPanel {
 	private JPasswordField psfConfirmPw;
 	private JPasswordField psfNewPw;
 	private JPasswordField psfOldPw;
+	private JLabel lblAvt;
+	private JButton btnChangePw;
+	private JButton btnCancelPw;
+	private JButton btnSavePw;
 	
-	public profile() {
+	private ProfileController controller;
+
+	public profile(Integer userId) {
 		setOpaque(false);
 		setBorder(new LineBorder(new Color(25, 25, 112)));
 		setBackground(new Color(235, 255, 250));
@@ -172,11 +180,6 @@ public class profile extends JPanel {
 		txfAddress.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		txfAddress.setColumns(10);
 		
-		canvasAvt = new Canvas();
-		canvasAvt.setBounds(5, 10, 90, 116);
-		panelEmp.add(canvasAvt);
-		canvasAvt.setBackground(new Color(245, 255, 250));
-		
 		btnUpload = new JButton("Upload");
 		btnUpload.setBounds(5, 130, 90, 30);
 		panelEmp.add(btnUpload);
@@ -225,6 +228,12 @@ public class profile extends JPanel {
 		cbStatus.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		cbStatus.setBackground(new Color(245, 255, 250));
 		
+		lblAvt = new JLabel("");
+		lblAvt.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+		lblAvt.setBackground(new Color(245, 255, 250));
+		lblAvt.setBounds(5, 5, 90, 116);
+		panelEmp.add(lblAvt);
+		
 		JLabel lbChangePw = new JLabel("CHANGE PASSWORD");
 		lbChangePw.setHorizontalAlignment(SwingConstants.CENTER);
 		lbChangePw.setForeground(new Color(25, 25, 112));
@@ -272,7 +281,7 @@ public class profile extends JPanel {
 		psfConfirmPw.setBounds(130, 108, 285, 25);
 		panelEmpList.add(psfConfirmPw);
 		
-		JButton btnChangePw = new JButton("Change password");
+		btnChangePw = new JButton("Change password");
 		btnChangePw.setForeground(new Color(25, 25, 112));
 		btnChangePw.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 11));
 		btnChangePw.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -280,7 +289,7 @@ public class profile extends JPanel {
 		btnChangePw.setBounds(425, 25, 105, 30);
 		panelEmpList.add(btnChangePw);
 		
-		JButton btnCancelPw = new JButton("Cancel");
+		btnCancelPw = new JButton("Cancel");
 		btnCancelPw.setForeground(new Color(25, 25, 112));
 		btnCancelPw.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 11));
 		btnCancelPw.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -288,12 +297,14 @@ public class profile extends JPanel {
 		btnCancelPw.setBounds(425, 65, 105, 30);
 		panelEmpList.add(btnCancelPw);
 		
-		JButton btnSavePw = new JButton("Save");
+		btnSavePw = new JButton("Save");
 		btnSavePw.setBounds(425, 105, 105, 30);
 		panelEmpList.add(btnSavePw);
 		btnSavePw.setForeground(new Color(25, 25, 112));
 		btnSavePw.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		btnSavePw.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnSavePw.setBackground(new Color(204, 204, 255));
+		
+		controller = new ProfileController(userId, txfID, txfName, txfPhone, txfAddress, txfEmail, txdate, cbRole, cbGender, btnUpload, btnEdit, btnCancel, btnSave, cbStatus, psfConfirmPw, psfNewPw, psfOldPw, lblAvt, btnChangePw, btnCancelPw, btnSavePw, null);
 	}
 }

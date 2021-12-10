@@ -38,7 +38,7 @@ public class billHistory extends JPanel {
 	private JComboBox cbFilter;
 	private JButton btnFind;
 	
-	public billHistory() {
+	public billHistory(Integer userId) {
 		setOpaque(false);
 		setBorder(new LineBorder(new Color(25, 25, 112)));
 		setBackground(new Color(235, 255, 250));
@@ -247,7 +247,7 @@ public class billHistory extends JPanel {
 		dateFind.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		dateFind.setBounds(380, 278, 100, 25);
 		add(dateFind);
-		controller = new HoaDonController(txfEmp, txfCus, txfPhone, txfIdBill, txdate, txfTotal, tableHistory, txfFind, tableDetail, txfIdEmp, controller, dateFind, cbFilter, btnFind);
+		controller = new HoaDonController(userId, txfEmp, txfCus, txfPhone, txfIdBill, txdate, txfTotal, tableHistory, txfFind, tableDetail, txfIdEmp, controller, dateFind, cbFilter, btnFind);
 	}
 	
 	public HoaDonController getController() {

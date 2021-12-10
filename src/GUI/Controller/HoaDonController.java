@@ -35,6 +35,7 @@ import java.util.List;
 
 
 public class HoaDonController {
+	private int userID;
 	private JTextField txfEmp;
 	private JTextField txfCus;
 	private JTextField txfPhone;
@@ -55,10 +56,11 @@ public class HoaDonController {
     private SanPhamDao pDao;
     private HoaDonChiTietDao bdDao;
 
-	public HoaDonController(JTextField txfEmp, JTextField txfCus, JTextField txfPhone, JTextField txfIdBill,
+	public HoaDonController(int userId, JTextField txfEmp, JTextField txfCus, JTextField txfPhone, JTextField txfIdBill,
 			JDateChooser txdate, JTextField txfTotal, JTable tableHistory, JTextField txfFind, JTable tableDetail,
 			JTextField txfIdEmp, HoaDonController controller, JDateChooser dateFind, JComboBox cbFilter,
 			JButton btnFind) {
+		this.userID = userId;
 		this.txfEmp = txfEmp;
 		this.txfCus = txfCus;
 		this.txfPhone = txfPhone;
