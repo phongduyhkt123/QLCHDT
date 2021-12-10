@@ -23,8 +23,8 @@ public class product extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txfID;
 	private JTextField txfName;
-	private JTextField txfPrice;
 	private JTextField txfQuantity;
+	private JTextField txfPrice;
 	private JTextField txfFind;
 	private JTable table;
 	private JButton btnFind;
@@ -90,13 +90,13 @@ public class product extends JPanel {
 		lbPrice.setBounds(20, 90, 100, 30);
 		panelCus.add(lbPrice);
 		
-		txfPrice = new JTextField();
-		txfPrice.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		txfPrice.setForeground(new Color(25, 25, 112));
-		txfPrice.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
-		txfPrice.setColumns(10);
-		txfPrice.setBounds(90, 133, 320, 25);
-		panelCus.add(txfPrice);
+		txfQuantity = new JTextField();
+		txfQuantity.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		txfQuantity.setForeground(new Color(25, 25, 112));
+		txfQuantity.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
+		txfQuantity.setColumns(10);
+		txfQuantity.setBounds(90, 133, 320, 25);
+		panelCus.add(txfQuantity);
 		
 		JLabel lbQuantity = new JLabel("Quantity");
 		lbQuantity.setForeground(new Color(25, 25, 112));
@@ -104,13 +104,13 @@ public class product extends JPanel {
 		lbQuantity.setBounds(20, 130, 100, 30);
 		panelCus.add(lbQuantity);
 		
-		txfQuantity = new JTextField();
-		txfQuantity.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		txfQuantity.setForeground(new Color(25, 25, 112));
-		txfQuantity.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
-		txfQuantity.setColumns(10);
-		txfQuantity.setBounds(90, 93, 320, 25);
-		panelCus.add(txfQuantity);
+		txfPrice = new JTextField();
+		txfPrice.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		txfPrice.setForeground(new Color(25, 25, 112));
+		txfPrice.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
+		txfPrice.setColumns(10);
+		txfPrice.setBounds(90, 93, 320, 25);
+		panelCus.add(txfPrice);
 		
 		btnAdd = new JButton("Add");
 		btnAdd.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -225,6 +225,6 @@ public class product extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		SanPhamController controll = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
+		SanPhamController controll = new SanPhamController(txfID, txfName, txfQuantity, txfPrice, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
 	}
 }
