@@ -213,7 +213,6 @@ public class formAdmin extends JFrame {
 				fHistory.setVisible(true);
 			}
 		});
-
 	}
 	
 	void Hide() {

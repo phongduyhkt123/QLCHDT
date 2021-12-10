@@ -22,10 +22,8 @@ import java.awt.event.ItemEvent;
 
 public class bill extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private JTextField txfPro;
 	private JTextField txfPrice;
 	private JTextField txfQuantity;
-	private JTextField txfCus;
 	private JTextField txfPhone;
 	private JTextField txfAddress;
 	private JTextField txfTotal;
@@ -68,16 +66,8 @@ public class bill extends JPanel {
 		cbCus.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		cbCus.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		cbCus.setBackground(new Color(245, 255, 250));
-		cbCus.setBounds(115, 13, 175, 25);
+		cbCus.setBounds(115, 13, 415, 25);
 		panelCus.add(cbCus);
-		
-		txfCus = new JTextField();
-		txfCus.setForeground(new Color(25, 25, 112));
-		txfCus.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-		txfCus.setColumns(10);
-		txfCus.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		txfCus.setBounds(301, 13, 230, 25);
-		panelCus.add(txfCus);
 		
 		JLabel lbPhone = new JLabel("Phone");
 		lbPhone.setForeground(new Color(25, 25, 112));
@@ -118,16 +108,8 @@ public class bill extends JPanel {
 		cbPro.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 14));
 		cbPro.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		cbPro.setBackground(new Color(245, 255, 250));
-		cbPro.setBounds(115, 93, 175, 25);
+		cbPro.setBounds(115, 93, 415, 25);
 		panelCus.add(cbPro);
-		
-		txfPro = new JTextField();
-		txfPro.setBounds(301, 93, 230, 25);
-		panelCus.add(txfPro);
-		txfPro.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		txfPro.setForeground(new Color(25, 25, 112));
-		txfPro.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-		txfPro.setColumns(10);
 		
 		JLabel lbPrice = new JLabel("Price");
 		lbPrice.setBounds(20, 130, 100, 30);
@@ -240,6 +222,7 @@ public class bill extends JPanel {
 		btnDel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnDel.setBackground(new Color(204, 204, 255));
 		
-		HoaDonChiTietController controll = new HoaDonChiTietController(txfPro, txfPrice, txfQuantity, txfCus, txfPhone, txfAddress, txfTotal, table, cbCus, cbPro, btnAdd, btnCancel, btnPay, btnDel);
+		HoaDonChiTietController controll = new HoaDonChiTietController(txfPrice, txfPrice, txfQuantity, txfPrice, txfPhone, txfAddress, txfTotal, table, cbCus, cbPro, btnAdd, btnCancel, btnPay, btnDel);
 	}
+	
 }

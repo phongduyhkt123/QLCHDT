@@ -92,13 +92,30 @@ public class HoaDonChiTietController {
 			}
 		});
 		
-//		table.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				loadRow();
-//			}
-//		});
-//		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnDel.setEnabled(true);
+			}
+		});
+		
+		btnDel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = table.getSelectedRow();
+				DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+				tableModel.removeRow(row);
+				table.setModel(tableModel);
+			}
+		});
+		
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				clearTable();
+			}
+		});
+		
 		btnAdd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -114,58 +131,6 @@ public class HoaDonChiTietController {
 //				buttonChangeStats(2);
 			}
 		});
-//		
-//		btnEdit.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				mode = 2;
-//				buttonChangeStats(2);
-//			}
-//		});
-//		
-//		btnCancel.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				buttonChangeStats(1);
-//			}
-//		});
-//		
-//		btnFind.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				loadTable(find());
-//			}
-//		});
-//		
-//		btnSave.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				if (mode == 1) {
-//					int input = JOptionPane.showConfirmDialog(null, "Thêm mới sản phẩm?");
-//					if (input == 0) {
-//						dao.insert(new SanPhamModel(
-//								txfName.getText(),
-//								Double.parseDouble(txfPrice.getText()),
-//								Integer.parseInt(txfQuantity.getText())
-//								));
-//						loadTable(dao.getAll());
-//						buttonChangeStats(1);
-//					}
-//
-//				}else if (mode == 2) {
-//					int input = JOptionPane.showConfirmDialog(null, "Chỉnh sửa sản phẩm?");
-//					if (input == 0) {
-//						dao.update(new SanPhamModel(Integer.parseInt(txfID.getText()),
-//								txfName.getText(),
-//								Double.parseDouble(txfPrice.getText()),
-//								Integer.parseInt(txfQuantity.getText())
-//								));
-//						loadTable(dao.getAll());
-//						buttonChangeStats(1);
-//					}
-//				}	
-//			}
-//		});
     }
 
 	public void loadCmbCustomer() {
@@ -199,10 +164,15 @@ public class HoaDonChiTietController {
 		
 		DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
 		try {
-			String name = ((SanPhamModel)cbPro.getSelectedItem()).getName();
+			SanPhamModel sanpham = ((SanPhamModel)cbPro.getSelectedItem());
+			String name = sanpham.getName();
 			int quantity = Integer.parseInt(txfQuantity.getText());
 			if (quantity < 1) {
-				JOptionPane.showMessageDialog(null, "Vui lòng nhập số lượng hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Invalid quantity!", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if (quantity > sanpham.getQuantity()) {
+				JOptionPane.showMessageDialog(null, "Not enought quantity! Maximum: " + String.valueOf(sanpham.getQuantity()), "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			boolean exist = false;
@@ -264,8 +234,10 @@ public class HoaDonChiTietController {
 													price,
 													quantity
 													));
-				System.out.println(i);
+				pDao.changeQuantity(idSp, quantity);
 			}
+			loadCmbProduct();
+			clearTable();
 			JOptionPane.showMessageDialog(null, "Tạo hóa đơn thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 		}catch(Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage() , "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -276,15 +248,24 @@ public class HoaDonChiTietController {
 	public void buttonChangeStats(int stat) {
 		if (stat == 1) {
 			btnAdd.setEnabled(true);
+			btnDel.setEnabled(false);
 //			btnEdit.setEnabled(true);
 //			btnSave.setEnabled(false);
-			btnCancel.setEnabled(false);
+//			btnCancel.setEnabled(false);
 		}else {
-			btnAdd.setEnabled(false);
+//			btnAdd.setEnabled(false);
 //			btnEdit.setEnabled(false);
 //			btnSave.setEnabled(true);
-			btnCancel.setEnabled(true);
+//			btnCancel.setEnabled(true);
 		}
 	}
-
+	
+	public void clearTable() {
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		for(int i =0; i< tableModel.getRowCount(); i++) {
+			tableModel.removeRow(i);
+		}
+		table.setModel(tableModel);
+	}
+	
 }

@@ -29,6 +29,7 @@ public class billHistory extends JPanel {
 	private JTable tableHistory;
 	private JTextField txfFind;
 	private JTable tableDetail;
+	private JTextField textField;
 	
 	public billHistory() {
 		setOpaque(false);
@@ -53,7 +54,7 @@ public class billHistory extends JPanel {
 		JLabel lbIdBill = new JLabel("ID Bill");
 		lbIdBill.setForeground(new Color(25, 25, 112));
 		lbIdBill.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
-		lbIdBill.setBounds(20, 10, 100, 30);
+		lbIdBill.setBounds(10, 10, 100, 30);
 		panelCus.add(lbIdBill);
 		
 		txfIdBill = new JTextField();
@@ -104,13 +105,13 @@ public class billHistory extends JPanel {
 		txfPhone.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
 		txfPhone.setColumns(10);
 		txfPhone.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		txfPhone.setBounds(381, 48, 150, 25);
+		txfPhone.setBounds(371, 48, 160, 25);
 		panelCus.add(txfPhone);
 		
 		JLabel lbCus = new JLabel("Customer");
 		lbCus.setForeground(new Color(25, 25, 112));
 		lbCus.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
-		lbCus.setBounds(20, 45, 100, 30);
+		lbCus.setBounds(10, 45, 100, 30);
 		panelCus.add(lbCus);
 		
 		txfCus = new JTextField();
@@ -124,11 +125,11 @@ public class billHistory extends JPanel {
 		JLabel lbEmp = new JLabel("Employee");
 		lbEmp.setForeground(new Color(25, 25, 112));
 		lbEmp.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
-		lbEmp.setBounds(20, 85, 100, 30);
+		lbEmp.setBounds(206, 80, 100, 30);
 		panelCus.add(lbEmp);
 		
 		txfEmp = new JTextField();
-		txfEmp.setBounds(100, 88, 210, 25);
+		txfEmp.setBounds(284, 83, 247, 25);
 		panelCus.add(txfEmp);
 		txfEmp.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		txfEmp.setForeground(new Color(25, 25, 112));
@@ -155,6 +156,20 @@ public class billHistory extends JPanel {
 			}
 		));
 		scrollDetail.setViewportView(tableDetail);
+		
+		JLabel lbIdEmp = new JLabel("ID Employee");
+		lbIdEmp.setForeground(new Color(25, 25, 112));
+		lbIdEmp.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
+		lbIdEmp.setBounds(10, 80, 100, 30);
+		panelCus.add(lbIdEmp);
+		
+		textField = new JTextField();
+		textField.setForeground(new Color(25, 25, 112));
+		textField.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
+		textField.setColumns(10);
+		textField.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		textField.setBounds(100, 83, 100, 25);
+		panelCus.add(textField);
 		
 		JLabel lbBillHistory = new JLabel("BILL HISTORY");
 		lbBillHistory.setHorizontalAlignment(SwingConstants.CENTER);
