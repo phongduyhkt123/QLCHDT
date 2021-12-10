@@ -12,7 +12,7 @@ import javax.swing.border.LineBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-//import Controller.EmployeeController;
+import Controller.NhanVienController;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -322,7 +322,7 @@ public class employee extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		//EmployeeController controll = new EmployeeController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, canvasAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind);
+		NhanVienController controll = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, canvasAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind);
 
 	}
 }

@@ -11,9 +11,14 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Controller.HoaDonChiTietController;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class bill extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -233,6 +238,7 @@ public class bill extends JPanel {
 		btnDel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		btnDel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnDel.setBackground(new Color(204, 204, 255));
-
+		
+		HoaDonChiTietController controll = new HoaDonChiTietController(txfPro, txfPrice, txfQuantity, txfCus, txfPhone, txfAddress, txfTotal, table, cbCus, cbPro, btnAdd, btnCancel, btnPay, btnDel);
 	}
 }

@@ -29,53 +29,61 @@ public class HoaDonChiTietController {
 	private JTextField txfPro;
 	private JTextField txfPrice;
 	private JTextField txfQuantity;
-	private JTextField textField_1;
+	private JTextField txfCus;
 	private JTextField txfPhone;
 	private JTextField txfAddress;
-	private JButton btnDel;
+	private JTextField txfTotal;
 	private JTable table;
+	private JComboBox cbCus;
+	private JComboBox cbPro;
 	private JButton btnAdd;
 	private JButton btnCancel;
-	private JComboBox cbPro;
-	private JComboBox cbID;
+	private JButton btnPay;
+	private JButton btnDel;
     private SanPhamDao pDao;
     private KhachHangDao cDao;
     private HoaDonDao bDao;
     private HoaDonChiTietDao bdDao;
     private int mode;
-
     
-    
-    
-	public HoaDonChiTietController(JTextField txfPro, JTextField txfPrice, JTextField txfQuantity,
-			JTextField textField_1, JTextField txfPhone, JTextField txfAddress, JButton btnDel, JTable table,
-			JButton btnAdd, JButton btnCancel, JComboBox cbPro, JComboBox cbID) {
+	public HoaDonChiTietController(JTextField txfPro, JTextField txfPrice, JTextField txfQuantity, JTextField txfCus,
+			JTextField txfPhone, JTextField txfAddress, JTextField txfTotal, JTable table, JComboBox cbCus,
+			JComboBox cbPro, JButton btnAdd, JButton btnCancel, JButton btnPay, JButton btnDel) {
 		super();
 		this.txfPro = txfPro;
 		this.txfPrice = txfPrice;
 		this.txfQuantity = txfQuantity;
-		this.textField_1 = textField_1;
+		this.txfCus = txfCus;
 		this.txfPhone = txfPhone;
 		this.txfAddress = txfAddress;
-		this.btnDel = btnDel;
+		this.txfTotal = txfTotal;
 		this.table = table;
+		this.cbCus = cbCus;
+		this.cbPro = cbPro;
 		this.btnAdd = btnAdd;
 		this.btnCancel = btnCancel;
-		this.cbPro = cbPro;
-		this.cbID = cbID;
-		
+		this.btnPay = btnPay;
+		this.btnDel = btnDel;
+
 		pDao = new SanPhamDaoImpl();
 		cDao = new KhachHangDaoImpl();
 		bDao = new HoaDonDaoImpl();
 		setEvent();
+		loadCmbCustomer();
 		buttonChangeStats(1);
 	}
 
 	public void setEvent() {
 		
-		cbID.addItemListener(new ItemListener() {
+		cbCus.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				loadCustomerInfo();
+			}
+		});
+		
+		cbPro.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				loadProductInfo();
 			}
 		});
 		
@@ -173,14 +181,27 @@ public class HoaDonChiTietController {
 	public void loadCmbCustomer() {
 		List<KhachHangModel> list = cDao.getAll();
 		for (KhachHangModel khachhang : list) {
-			cbID.addItem(khachhang); // load customer name -- by override toString
+			cbCus.addItem(khachhang); // load customer name -- by override toString
+		}
+	}
+	
+	public void loadCmbProduct() {
+		List<KhachHangModel> list = cDao.getAll();
+		for (KhachHangModel khachhang : list) {
+			cbCus.addItem(khachhang); // load customer name -- by override toString
 		}
 	}
 	
 	public void loadCustomerInfo() {
-		KhachHangModel khachhang = (KhachHangModel)cbID.getSelectedItem();
-		txfPhone.setText(khachhang.getName());
-		txfAddress.setText(khachhang.getPhone());
+		KhachHangModel khachhang = (KhachHangModel)cbCus.getSelectedItem();
+		txfPhone.setText(khachhang.getPhone());
+		txfAddress.setText(khachhang.getAddress());
+	}
+	
+	public void loadProductInfo() {
+		KhachHangModel khachhang = (KhachHangModel)cbCus.getSelectedItem();
+		txfPhone.setText(khachhang.getPhone());
+		txfAddress.setText(khachhang.getAddress());
 	}
 	
 	

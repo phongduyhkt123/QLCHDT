@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-//import Controller.SanPhamController;
+import Controller.SanPhamController;
 
 import javax.swing.DefaultComboBoxModel;
 
@@ -225,6 +225,6 @@ public class product extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		//SanPhamController controll = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
+		SanPhamController controll = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
 	}
 }

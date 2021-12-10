@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
+import Controller.KhachHangController;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -234,6 +236,6 @@ public class customer extends JPanel {
 			}
 		));
 		scrollPane.setViewportView(table);
-
+		KhachHangController controll = new KhachHangController(txfName, txfPhone, txfAddress, txfFind, txdate, txfId, cbGender, btnAdd, btnEdit, btnCancel, btnSave, cbFilter, btnFind, table);
 	}
 }
