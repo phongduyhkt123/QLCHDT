@@ -45,7 +45,8 @@ public class employee extends JPanel {
 	private JComboBox cbFilter;
 	private JButton btnFind;
 	private JComboBox cbStatus;
-	
+	private NhanVienController controller;
+
 	public employee() {
 		setOpaque(false);
 		setBorder(new LineBorder(new Color(25, 25, 112)));
@@ -324,6 +325,14 @@ public class employee extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		NhanVienController controll = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, lblAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind, cbStatus);
+		controller = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, lblAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind, cbStatus);
+	}
+	
+	public NhanVienController getController() {
+		return controller;
+	}
+
+	public void setController(NhanVienController controller) {
+		this.controller = controller;
 	}
 }

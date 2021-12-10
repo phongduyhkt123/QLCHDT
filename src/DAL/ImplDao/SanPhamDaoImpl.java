@@ -32,7 +32,7 @@ public class SanPhamDaoImpl implements SanPhamDao{
 				list.add(sanpham);
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return list;
 	}
@@ -48,7 +48,7 @@ public class SanPhamDaoImpl implements SanPhamDao{
 			System.out.println("Insert Successfully!");
 			return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -65,7 +65,7 @@ public class SanPhamDaoImpl implements SanPhamDao{
 			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -80,7 +80,7 @@ public class SanPhamDaoImpl implements SanPhamDao{
 		System.out.println("Delete Successfully!");
 		return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -100,7 +100,7 @@ public class SanPhamDaoImpl implements SanPhamDao{
 				sanpham.setQuantity(rs.getInt("soLuong"));
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return sanpham;
 	}
@@ -122,7 +122,7 @@ public class SanPhamDaoImpl implements SanPhamDao{
 				list.add(sanpham);
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return list;
 	}
@@ -138,7 +138,7 @@ public class SanPhamDaoImpl implements SanPhamDao{
 			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}

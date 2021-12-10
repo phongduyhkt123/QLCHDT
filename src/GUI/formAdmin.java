@@ -41,8 +41,11 @@ public class formAdmin extends JFrame {
 	public formAdmin() {
 		setBackground(new Color(173, 216, 230));
 		setTitle("Admin");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 710, 540);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(245, 255, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -182,6 +185,7 @@ public class formAdmin extends JFrame {
 		btnEmp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fEmployee.getController().loadData();
 				fEmployee.setVisible(true);
 			}
 		});
@@ -189,6 +193,7 @@ public class formAdmin extends JFrame {
 		btnCus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fCustomer.getController().loadData();
 				fCustomer.setVisible(true);
 			}
 		});
@@ -196,6 +201,7 @@ public class formAdmin extends JFrame {
 		btnPro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fProduct.getController().loadData();
 				fProduct.setVisible(true);
 			}
 		});
@@ -213,7 +219,12 @@ public class formAdmin extends JFrame {
 				fHistory.setVisible(true);
 			}
 		});
-
+		
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 	}
 	
 	void Hide() {

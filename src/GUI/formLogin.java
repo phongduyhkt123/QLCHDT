@@ -49,6 +49,8 @@ public class formLogin extends JFrame {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 400);
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -79,6 +81,7 @@ public class formLogin extends JFrame {
 		rdbtnEmployee.setForeground(new Color(25, 25, 112));
 		rdbtnEmployee.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 15));
 		rdbtnEmployee.setBounds(200, 109, 109, 23);
+		rdbtnEmployee.setSelected(true);
 		mainPanel.add(rdbtnEmployee);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -130,6 +133,6 @@ public class formLogin extends JFrame {
 		bg.setIcon(bgload);
 		getContentPane().add(bg);
 		
-		LoginController controll = new LoginController(txfUsername, passwordField, rdbtnEmployee, rdbtnManage, btnLogIn);
+		LoginController controll = new LoginController(this, txfUsername, passwordField, rdbtnEmployee, rdbtnManage, btnLogIn);
 	}
 }

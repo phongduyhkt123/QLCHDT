@@ -1,8 +1,6 @@
 package Controller;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -14,8 +12,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import DTO.NhanVienModel;
+import GUI.formAdmin;
+import GUI.formEmployee;
+import GUI.formLogin;
+import Ultils.MyUtils;
 
 public class LoginController {
+	private formLogin form;
 	private JTextField txfUsername;
 	private JPasswordField passwordField;
 	private JRadioButton rdbtnEmployee;
@@ -23,15 +26,15 @@ public class LoginController {
 	private JButton btnLogIn;
     private NhanVienDao dao;
 
-    public LoginController(JTextField txfUsername, JPasswordField passwordField, JRadioButton rdbtnEmployee,
+    public LoginController(formLogin form, JTextField txfUsername, JPasswordField passwordField, JRadioButton rdbtnEmployee,
 			JRadioButton rdbtnManage, JButton btnLogIn) {
-		super();
+    	this.form = form;
 		this.txfUsername = txfUsername;
 		this.passwordField = passwordField;
 		this.rdbtnEmployee = rdbtnEmployee;
 		this.rdbtnManage = rdbtnManage;
 		this.btnLogIn = btnLogIn;
-		
+		setEvent();
 		dao = new NhanVienDaoImpl();
 	}
 
@@ -43,23 +46,34 @@ public class LoginController {
     				NhanVienModel nhanvien = dao.login(txfUsername.getText(), passwordField.getText());
     				if(nhanvien != null) {
     					if(nhanvien.getStatus() == 1) {
-	    					if(rdbtnManage.isSelected() && nhanvien.getRole() == 1) {
-	    						JOptionPane.showMessageDialog(null, "Bạn là quản lý!");
-	    					}else if (rdbtnEmployee.isSelected() && nhanvien.getRole() == 0) {
-	    						JOptionPane.showMessageDialog(null, "Bạn là nhân viên!");
-	    					}else {
-	    						JOptionPane.showMessageDialog(null, "Thông tin không phù hợp!");
+	    					if (rdbtnManage.isSelected() && nhanvien.getRole() == 1) {
+	    						new formAdmin().addWindowListener(new java.awt.event.WindowAdapter() {
+	    					        @Override
+	    					        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+	    					        	form.setVisible(true);
+	    					        }
+	    					    });
+	    						form.setVisible(false);
+	    					} else if (rdbtnEmployee.isSelected() && nhanvien.getRole() == 2) {
+	    						new formEmployee().addWindowListener(new java.awt.event.WindowAdapter() {
+	    					        @Override
+	    					        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+	    					        	form.setVisible(true);
+	    					        }
+	    					    });
+	    						form.setVisible(false);
+	    					} else {
+	    						MyUtils.showErrorMessage("Lỗi đăng nhập" , "Thông tin không phù hợp!");
 	    					}
     					}else {
-    						JOptionPane.showMessageDialog(null, "Tài khoản bị vô hiệu hóa!");
+    						MyUtils.showErrorMessage("Lỗi đăng nhập" , "Tài khoản bị vô hiệu hóa!");
     					}
     				}else {
-    					JOptionPane.showMessageDialog(null, "Sai thông tin đăng nhập!");
-    					JOptionPane.showMessageDialog(null, " ádfsdafdsa" , "Lỗi", JOptionPane.ERROR_MESSAGE);
+    					MyUtils.showErrorMessage("Lỗi đăng nhập" , "Sai thông tin đăng nhập!");
     				}
-    			}catch(Exception ex) {
+    			} catch(Exception ex) {
     				ex.printStackTrace();
-    				JOptionPane.showMessageDialog(null, "Có lỗi xảy ra. Vui lòng thử lai!");
+    				MyUtils.showErrorMessage("Lỗi đăng nhập" , "Có lỗi xảy ra. Vui lòng thử lại!");
     			}
     		}
     	});

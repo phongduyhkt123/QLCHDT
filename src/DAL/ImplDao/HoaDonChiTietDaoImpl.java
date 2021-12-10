@@ -31,8 +31,8 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 				hdct.setQuantity(rs.getInt("soLuong"));
 				list.add(hdct);
 			}
-		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+		} catch(Exception ex) {
+			ex.printStackTrace();
 		}
 		return list;
 	}
@@ -49,8 +49,8 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 			st.execute();
 			System.out.println("Insert HDCT Successfully!");
 			return true;
-		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+		} catch(Exception ex) {
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -58,10 +58,6 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 	public boolean update(HoaDonChiTietModel hdct) {	
 		return false;
 	}
-//	
-//	public boolean delete(int id) {
-//		return false;
-//	}
 	
 	public HoaDonChiTietModel getById(int id) {
 		return null;

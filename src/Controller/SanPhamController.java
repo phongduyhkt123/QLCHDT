@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import DAL.SanPhamDao;
 import DAL.ImplDao.SanPhamDaoImpl;
 import DTO.SanPhamModel;
+import Ultils.MyUtils;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -54,12 +55,15 @@ public class SanPhamController {
 		this.btnEdit = btnEdit;
 		this.btnAdd = btnAdd;
 		dao = new SanPhamDaoImpl();
-		loadTable(dao.getAll());
 		setEvent();
 		buttonChangeStats(1);
 	}
+	
+	public void loadData() {
+		loadTable(dao.getAll());
+	}
 
-	public void setEvent() {	
+	private void setEvent() {	
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -128,7 +132,7 @@ public class SanPhamController {
 		});
     }
 
-	public void loadTable(List<SanPhamModel> list) {
+	private void loadTable(List<SanPhamModel> list) {
 		String[] labels= {"ID", "Tên Sản Phẩm ", "Giá", "Số lượng"};
 		DefaultTableModel tableModel = new DefaultTableModel(labels, 0);
 		try {
@@ -138,12 +142,12 @@ public class SanPhamController {
 			}
 			this.table.setModel(tableModel);
 		}catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+			MyUtils.showErrorMessage("Lỗi", ex.getMessage());
 		}
 	}
 	
-	public void loadRow() {
+	private void loadRow() {
 		int row = table.getSelectedRow();
 		txfID.setText(table.getValueAt(row, 0).toString());
 		txfName.setText(table.getValueAt(row, 1).toString());
@@ -151,7 +155,7 @@ public class SanPhamController {
 		txfQuantity.setText(table.getValueAt(row, 3).toString());
 	}
 	
-	public void buttonChangeStats(int stat) {
+	private void buttonChangeStats(int stat) {
 		if (stat == 1) {
 			btnAdd.setEnabled(true);
 			btnEdit.setEnabled(true);
@@ -165,7 +169,7 @@ public class SanPhamController {
 		}
 	}
 	
-	public List<SanPhamModel> find() {
+	private List<SanPhamModel> find() {
 		String kw = txfFind.getText();
 		if (kw.equals("")) {
 			return dao.getAll();

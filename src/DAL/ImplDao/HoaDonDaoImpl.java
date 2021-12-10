@@ -33,7 +33,7 @@ public class HoaDonDaoImpl implements HoaDonDao{
 				list.add(hoadon);
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return list;
 	}
@@ -54,7 +54,7 @@ public class HoaDonDaoImpl implements HoaDonDao{
 				key = rs.getInt(1);
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return key;
 	}
@@ -72,7 +72,7 @@ public class HoaDonDaoImpl implements HoaDonDao{
 			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -87,7 +87,7 @@ public class HoaDonDaoImpl implements HoaDonDao{
 		System.out.println("Delete Successfully!");
 		return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -108,7 +108,7 @@ public class HoaDonDaoImpl implements HoaDonDao{
 				hoadon.setIdNV(rs.getInt("idNV"));
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return hoadon;
 	}
