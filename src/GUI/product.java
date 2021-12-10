@@ -36,6 +36,8 @@ public class product extends JPanel {
 	private JButton btnEdit;
 	private JButton btnAdd;
 
+	private SanPhamController controller;
+
 	public product() {
 		setOpaque(false);
 		setBorder(new LineBorder(new Color(25, 25, 112)));
@@ -162,7 +164,7 @@ public class product extends JPanel {
 		lbStatus.setBounds(20, 170, 100, 30);
 		panelCus.add(lbStatus);
 		
-		cbID = new JComboBox();
+		cbID = new  JComboBox();
 		cbID.setForeground(new Color(25, 25, 112));
 		cbID.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		cbID.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -225,6 +227,14 @@ public class product extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		SanPhamController controll = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
+		controller = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
+	}
+	
+	public SanPhamController getController() {
+		return controller;
+	}
+
+	public void setController(SanPhamController controller) {
+		this.controller = controller;
 	}
 }

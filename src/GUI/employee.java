@@ -43,6 +43,8 @@ public class employee extends JPanel {
 	private JButton btnSave;
 	private JComboBox cbFilter;
 	private JComboBox cbStatus;
+	private NhanVienController controller;
+
 	private JButton btnFind;
 	
 	public employee() {
@@ -314,5 +316,15 @@ public class employee extends JPanel {
 			}
 		));
 		scrollPane.setViewportView(table);
+		
+		controller = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, lblAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind, cbStatus);
+	}
+	
+	public NhanVienController getController() {
+		return controller;
+	}
+
+	public void setController(NhanVienController controller) {
+		this.controller = controller;
 	}
 }

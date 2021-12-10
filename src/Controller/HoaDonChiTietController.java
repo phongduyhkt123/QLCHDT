@@ -19,6 +19,7 @@ import DTO.HoaDonChiTietModel;
 import DTO.HoaDonModel;
 import DTO.KhachHangModel;
 import DTO.SanPhamModel;
+import Ultils.MyUtils;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -78,7 +79,7 @@ public class HoaDonChiTietController {
 		buttonChangeStats(1);
 	}
 
-	public void setEvent() {
+	private void setEvent() {
 		
 		cbCus.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
@@ -133,33 +134,33 @@ public class HoaDonChiTietController {
 		});
     }
 
-	public void loadCmbCustomer() {
+	private void loadCmbCustomer() {
 		List<KhachHangModel> list = cDao.getAll();
 		for (KhachHangModel khachhang : list) {
 			cbCus.addItem(khachhang); // load customer name -- by override toString
 		}
 	}
 	
-	public void loadCmbProduct() {
+	private void loadCmbProduct() {
 		List<SanPhamModel> list = pDao.getAll();
 		for (SanPhamModel sanpham : list) {
 			cbPro.addItem(sanpham);
 		}
 	}
 	
-	public void loadCustomerInfo() {
+	private void loadCustomerInfo() {
 		KhachHangModel khachhang = (KhachHangModel)cbCus.getSelectedItem();
 		txfPhone.setText(khachhang.getPhone());
 		txfAddress.setText(khachhang.getAddress());
 	}
 	
-	public void loadProductInfo() {
+	private void loadProductInfo() {
 		SanPhamModel sanpham = (SanPhamModel)cbPro.getSelectedItem();
 		txfPrice.setText(String.valueOf(sanpham.getPrice()));
 //		txfQuantity.setText(String.valueOf(sanpham.getQuantity()));
 	}
 	
-	public void addToTable() {
+	private void addToTable() {
 //		String[] labels= {"Tên Sản Phẩm ", "Giá", "Số lượng"};
 		
 		DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
@@ -168,11 +169,11 @@ public class HoaDonChiTietController {
 			String name = sanpham.getName();
 			int quantity = Integer.parseInt(txfQuantity.getText());
 			if (quantity < 1) {
-				JOptionPane.showMessageDialog(null, "Invalid quantity!", "Error", JOptionPane.ERROR_MESSAGE);
+				MyUtils.showErrorMessage("Error", "Invalid quantity!");
 				return;
 			}
 			if (quantity > sanpham.getQuantity()) {
-				JOptionPane.showMessageDialog(null, "Not enought quantity! Maximum: " + String.valueOf(sanpham.getQuantity()), "Error", JOptionPane.ERROR_MESSAGE);
+				MyUtils.showErrorMessage("Error", "Not enought quantity! Maximum: " + String.valueOf(sanpham.getQuantity()));
 				return;
 			}
 			boolean exist = false;
@@ -191,13 +192,13 @@ public class HoaDonChiTietController {
 			}
 			this.table.setModel(tableModel);
 			showTotalPrice();
-		}catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			MyUtils.showErrorMessage("Error", ex.getMessage());
 		}
 	}
 	
-	public void showTotalPrice() {
+	private void showTotalPrice() {
 		try {
 			DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
 			double total = 0;
@@ -207,13 +208,13 @@ public class HoaDonChiTietController {
 			}
 			txfTotal.setText(String.valueOf(total));
 		}catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+			MyUtils.showErrorMessage("Lỗi", ex.getMessage());
 		}
 		
 	}
 	
-	public void createBill() {
+	private void createBill() {
 		DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
 		try {
 			int id = bDao.insert(new HoaDonModel(new Date(new java.util.Date().getTime()),
@@ -222,7 +223,7 @@ public class HoaDonChiTietController {
 					((KhachHangModel)cbCus.getSelectedItem()).getId() // id khach hang
 					));
 			if (id == -1) {
-				JOptionPane.showMessageDialog(null, "Có lỗi xảy ra vui lòng thử lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				MyUtils.showErrorMessage("Lỗi", "Có lỗi xảy ra vui lòng thử lại!");
 				return;
 			}
 			for (int i =0; i< tableModel.getRowCount(); i++) {
@@ -238,14 +239,13 @@ public class HoaDonChiTietController {
 			}
 			loadCmbProduct();
 			clearTable();
-			JOptionPane.showMessageDialog(null, "Tạo hóa đơn thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+			MyUtils.showInfoMessage("Thông báo", "Tạo hóa đơn thành công!");
 		}catch(Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage() , "Lỗi", JOptionPane.ERROR_MESSAGE);
+			MyUtils.showErrorMessage("Lỗi", ex.getMessage());
 		}
-
 	}
 	
-	public void buttonChangeStats(int stat) {
+	private void buttonChangeStats(int stat) {
 		if (stat == 1) {
 			btnAdd.setEnabled(true);
 			btnDel.setEnabled(false);

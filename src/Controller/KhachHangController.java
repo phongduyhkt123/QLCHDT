@@ -12,6 +12,7 @@ import com.toedter.calendar.JDateChooser;
 import DAL.KhachHangDao;
 import DAL.ImplDao.KhachHangDaoImpl;
 import DTO.KhachHangModel;
+import Ultils.MyUtils;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -57,13 +58,14 @@ public class KhachHangController {
 		this.btnFind = btnFind;
 		this.table = table;
 		dao = new KhachHangDaoImpl();
-		loadTable(dao.getAll());
 		setEvent();
 	}
 
+	public void loadData() {
+		loadTable(dao.getAll());
+	}
 
-
-	public void setEvent() {	
+	private void setEvent() {	
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -136,7 +138,7 @@ public class KhachHangController {
 		});
     }
 
-	public void loadTable(List<KhachHangModel> list) {
+	private void loadTable(List<KhachHangModel> list) {
 		String[] labels= {"ID", "Tên Khách Hàng", "Giới tính", "Ngày sinh", "Điện thoại", "Địa chỉ"};
 		DefaultTableModel tableModel = new DefaultTableModel(labels, 0);
 		try {
@@ -147,12 +149,12 @@ public class KhachHangController {
 			}
 			this.table.setModel(tableModel);
 		}catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+			MyUtils.showErrorMessage("Lỗi", ex.getMessage());
 		}
 	}
 	
-	public void loadRow() {
+	private void loadRow() {
 		int row = table.getSelectedRow();
 		txfId.setText(table.getValueAt(row, 0).toString());
 		txfName.setText(table.getValueAt(row, 1).toString());
@@ -163,7 +165,7 @@ public class KhachHangController {
 
 	}
 	
-	public void buttonChangeStats(int stat) {
+	private void buttonChangeStats(int stat) {
 		if (stat == 1) {
 			btnAdd.setEnabled(true);
 			btnEdit.setEnabled(true);
@@ -177,7 +179,7 @@ public class KhachHangController {
 		}
 	}
 	
-	public List<KhachHangModel> find() {
+	private List<KhachHangModel> find() {
 		String kw = txfFind.getText();
 		if (kw.equals("")) {
 			return dao.getAll();

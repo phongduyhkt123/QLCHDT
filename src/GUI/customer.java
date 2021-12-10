@@ -37,7 +37,8 @@ public class customer extends JPanel {
 	private JComboBox cbFilter;
 	private JButton btnFind;
 	private JTable table;
-	
+	private KhachHangController controller;
+
 	public customer() {
 		setOpaque(false);
 		setBorder(new LineBorder(new Color(25, 25, 112)));
@@ -236,6 +237,14 @@ public class customer extends JPanel {
 			}
 		));
 		scrollPane.setViewportView(table);
-		KhachHangController controll = new KhachHangController(txfName, txfPhone, txfAddress, txfFind, txdate, txfId, cbGender, btnAdd, btnEdit, btnCancel, btnSave, cbFilter, btnFind, table);
+		controller = new KhachHangController(txfName, txfPhone, txfAddress, txfFind, txdate, txfId, cbGender, btnAdd, btnEdit, btnCancel, btnSave, cbFilter, btnFind, table);
+	}
+	
+	public KhachHangController getController() {
+		return controller;
+	}
+
+	public void setController(KhachHangController controller) {
+		this.controller = controller;
 	}
 }

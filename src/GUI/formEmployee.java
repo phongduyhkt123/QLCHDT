@@ -35,7 +35,6 @@ public class formEmployee extends JFrame {
 	customer fCustomer = new customer();
 	product fProduct = new product();
 	bill fBill = new bill();
-	employee fEmployee = new employee();
 	
 	public formEmployee() {
 		setBackground(new Color(25, 25, 112));
@@ -43,6 +42,8 @@ public class formEmployee extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 710, 540);
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(245, 255, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -129,12 +130,6 @@ public class formEmployee extends JFrame {
 		fBill.setBackground(new Color(235, 255, 250));
 		contentPane.add(fBill);
 		
-		fEmployee.setVisible(false);
-		fEmployee.setOpaque(false);
-		fEmployee.setBounds(135, 0, 559, 500);
-		fEmployee.setBackground(new Color(235, 255, 250));
-		contentPane.add(fEmployee);
-		
 		JLabel bg =new JLabel();
 		bg.setBounds(0,0,700,500);
 		ImageIcon avtload = new ImageIcon(new ImageIcon(this.getClass().getResource("/background.png")).getImage().getScaledInstance(bg.getWidth(),bg.getHeight(), Image.SCALE_SMOOTH));
@@ -144,6 +139,7 @@ public class formEmployee extends JFrame {
 		btnCus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fCustomer.getController().loadData();
 				fCustomer.setVisible(true);
 			}
 		});
@@ -151,6 +147,7 @@ public class formEmployee extends JFrame {
 		btnPro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fProduct.getController().loadData();
 				fProduct.setVisible(true);
 			}
 		});
@@ -165,7 +162,13 @@ public class formEmployee extends JFrame {
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
-				fEmployee.setVisible(true);
+				
+			}
+		});
+		
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
 		});
 	}
@@ -174,6 +177,5 @@ public class formEmployee extends JFrame {
 		fCustomer.setVisible(false);
 		fProduct.setVisible(false);
 		fBill.setVisible(false);
-		fEmployee.setVisible(false);
 	}
 }

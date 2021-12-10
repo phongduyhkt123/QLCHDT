@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.NhanVienModel;
+import Ultils.MyUtils;
 
 public class NhanVienController {
 	private JTextField txfID;
@@ -84,12 +85,15 @@ public class NhanVienController {
 		this.btnFind = btnFind;
 		this.cbStatus = cbStatus;
 		dao = new NhanVienDaoImpl();
-		loadTable(dao.getAll());
 		setEvent();
 		buttonChangeStats(1);
 	}
 
-	public void setEvent() {	
+    public void loadData() {
+		loadTable(dao.getAll());
+	}
+    
+	private void setEvent() {	
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -209,7 +213,7 @@ public class NhanVienController {
 		});
     }
 
-	public void loadTable(List<NhanVienModel> list) {
+	private void loadTable(List<NhanVienModel> list) {
 		String[] labels= {"ID", "Tên Nhân Viên", "Giới tính", "Ngày sinh", "Điện thoại", "Địa chỉ", "Email", "Chức vụ", "Password", "Trạng thái", "avt"};
 		DefaultTableModel tableModel = new DefaultTableModel(labels, 0);
 		try {
@@ -223,11 +227,11 @@ public class NhanVienController {
 			this.table.removeColumn(this.table.getColumnModel().getColumn(10));
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+			MyUtils.showErrorMessage("Lỗi", ex.getMessage());
 		}
 	}
 	
-	public void loadRow() {
+	private void loadRow() {
 		int row = table.getSelectedRow();
 		txfID.setText(table.getValueAt(row, 0).toString());
 		txfName.setText(table.getValueAt(row, 1).toString());
@@ -258,7 +262,7 @@ public class NhanVienController {
 		}
 	}
 	
-	public void buttonChangeStats(int stat) {
+	private void buttonChangeStats(int stat) {
 		if (stat == 1) {
 			btnAdd.setEnabled(true);
 			btnEdit.setEnabled(true);
@@ -276,7 +280,7 @@ public class NhanVienController {
 		}
 	}
 	
-	public List<NhanVienModel> find() {
+	private List<NhanVienModel> find() {
 		String kw = txfFind.getText();
 		if (kw.equals("")) {
 			return dao.getAll();

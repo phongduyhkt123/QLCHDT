@@ -35,7 +35,7 @@ public class KhachHangDaoImpl implements KhachHangDao{
 				list.add(khachhang);
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return list;
 	}
@@ -57,7 +57,7 @@ public class KhachHangDaoImpl implements KhachHangDao{
 				khachhang.setPhone(rs.getString("SDT"));
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return khachhang;
 	}
@@ -75,7 +75,7 @@ public class KhachHangDaoImpl implements KhachHangDao{
 			System.out.println("Insert Successfully!");
 			return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -94,7 +94,7 @@ public class KhachHangDaoImpl implements KhachHangDao{
 			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -109,7 +109,7 @@ public class KhachHangDaoImpl implements KhachHangDao{
 		System.out.println("Delete Successfully!");
 		return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -133,7 +133,7 @@ public class KhachHangDaoImpl implements KhachHangDao{
 				list.add(khachhang);
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return list;
 	}
