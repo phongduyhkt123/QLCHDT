@@ -13,6 +13,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JYearChooser;
+
+import GUI.Controller.ThongKeController;
+
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JTextField;
@@ -27,10 +30,16 @@ public class statis extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JButton btnPrint;
-	private JComboBox comboBox;
+	private JButton btnCreate;
+	private JButton btnCreateByTime;
+	private JButton btnPrintByTime;
+	private JComboBox cbReportType;
 	private JYearChooser cbYear;
 	private JDateChooser beginDate;
 	private JDateChooser endDate;
+	private ThongKeController controller;
+
+	private JTable table_1;
 
 	public statis() {
 		setOpaque(false);
@@ -58,14 +67,14 @@ public class statis extends JPanel {
 		lbStatisChoose.setBounds(10, 10, 180, 30);
 		panelCus.add(lbStatisChoose);
 
-		comboBox = new JComboBox();
-		comboBox.setForeground(new Color(25, 25, 112));
-		comboBox.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Month", "Quater", "Year" }));
-		comboBox.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		comboBox.setBackground(new Color(245, 255, 250));
-		comboBox.setBounds(190, 13, 80, 25);
-		panelCus.add(comboBox);
+		cbReportType = new JComboBox();
+		cbReportType.setForeground(new Color(25, 25, 112));
+		cbReportType.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
+		cbReportType.setModel(new DefaultComboBoxModel(new String[] { "Month", "Quater", "Year" }));
+		cbReportType.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		cbReportType.setBackground(new Color(245, 255, 250));
+		cbReportType.setBounds(190, 13, 80, 25);
+		panelCus.add(cbReportType);
 
 		cbYear = new JYearChooser();
 		cbYear.getSpinner().setLocation(1, 14);
@@ -101,7 +110,7 @@ public class statis extends JPanel {
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {}));
 		scrollStatis.setViewportView(table);
 
-		JButton btnCreate = new JButton("Create");
+		btnCreate = new JButton("Create");
 		btnCreate.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnCreate.setForeground(new Color(25, 25, 112));
 		btnCreate.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
@@ -130,6 +139,13 @@ public class statis extends JPanel {
 		scrollStatisDate.setBackground(new Color(176, 196, 222));
 		scrollStatisDate.setBounds(10, 85, 520, 154);
 		panelBillDetail.add(scrollStatisDate);
+		
+		table_1 = new JTable();
+		table_1.setBackground(new Color(204, 204, 255));
+		table_1.setForeground(new Color(25, 25, 112));
+		table_1.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
+		table_1.setModel(new DefaultTableModel(new Object[][] {}, new String[] {}));
+		scrollStatisDate.setViewportView(table_1);
 
 		JDateChooser beginDate = new JDateChooser();
 		beginDate.setForeground(new Color(25, 25, 112));
@@ -153,23 +169,33 @@ public class statis extends JPanel {
 		endDate.setBounds(385, 13, 145, 25);
 		panelBillDetail.add(endDate);
 
-		JButton btnCreateDate = new JButton("Create");
-		btnCreateDate.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnCreateDate.setForeground(new Color(25, 25, 112));
-		btnCreateDate.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnCreateDate.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		btnCreateDate.setBackground(new Color(204, 204, 255));
-		btnCreateDate.setBounds(185, 45, 80, 30);
-		panelBillDetail.add(btnCreateDate);
+		btnCreateByTime = new JButton("Create");
+		btnCreateByTime.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnCreateByTime.setForeground(new Color(25, 25, 112));
+		btnCreateByTime.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		btnCreateByTime.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		btnCreateByTime.setBackground(new Color(204, 204, 255));
+		btnCreateByTime.setBounds(185, 45, 80, 30);
+		panelBillDetail.add(btnCreateByTime);
 
-		JButton btnPrintDate = new JButton("Print");
-		btnPrintDate.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnPrintDate.setForeground(new Color(25, 25, 112));
-		btnPrintDate.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnPrintDate.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		btnPrintDate.setBackground(new Color(204, 204, 255));
-		btnPrintDate.setBounds(275, 44, 80, 30);
-		panelBillDetail.add(btnPrintDate);
-
+		btnPrintByTime = new JButton("Print");
+		btnPrintByTime.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnPrintByTime.setForeground(new Color(25, 25, 112));
+		btnPrintByTime.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
+		btnPrintByTime.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		btnPrintByTime.setBackground(new Color(204, 204, 255));
+		btnPrintByTime.setBounds(275, 44, 80, 30);
+		panelBillDetail.add(btnPrintByTime);
+		
+		controller = new ThongKeController(table, table_1, btnPrint, btnCreate, btnCreateByTime, btnPrintByTime, cbReportType, cbYear, beginDate, endDate);
 	}
+	
+	public ThongKeController getController() {
+		return controller;
+	}
+
+	public void setController(ThongKeController controller) {
+		this.controller = controller;
+	}
+	
 }

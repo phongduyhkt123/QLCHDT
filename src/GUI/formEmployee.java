@@ -108,7 +108,7 @@ public class formEmployee extends JFrame {
 		btnProfile.setForeground(new Color(25, 25, 112));
 		btnProfile.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 16));
 		btnProfile.setBackground(new Color(176, 196, 222));
-		btnProfile.setBounds(10, 280, 115, 35);
+		btnProfile.setBounds(10, 230, 115, 35);
 		panel.add(btnProfile);
 		
 		JButton btnLogOut = new JButton("Log out");
@@ -119,15 +119,6 @@ public class formEmployee extends JFrame {
 		btnLogOut.setBackground(new Color(176, 196, 222));
 		btnLogOut.setBounds(10, 440, 115, 35);
 		panel.add(btnLogOut);
-		
-		JButton btnReport = new JButton("Report");
-		btnReport.setOpaque(false);
-		btnReport.setForeground(new Color(25, 25, 112));
-		btnReport.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 16));
-		btnReport.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		btnReport.setBackground(new Color(176, 196, 222));
-		btnReport.setBounds(10, 230, 115, 35);
-		panel.add(btnReport);
 		
 		fCustomer.setVisible(false);
 		fCustomer.setOpaque(false);
