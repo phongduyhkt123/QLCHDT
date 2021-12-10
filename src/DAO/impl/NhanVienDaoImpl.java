@@ -126,7 +126,6 @@ public class NhanVienDaoImpl implements NhanVienDao{
 			st.setInt(9, nhanvien.getRole());
 			st.setInt(10, nhanvien.getStatus());
 			st.execute();
-			System.out.println("Insert Successfully!");
 			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -159,7 +158,6 @@ public class NhanVienDaoImpl implements NhanVienDao{
 			st.setInt(10, nhanvien.getStatus());
 			st.setInt(11, nhanvien.getId());
 			st.execute();
-			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -175,7 +173,6 @@ public class NhanVienDaoImpl implements NhanVienDao{
 		st.setInt(1, id);
 		st.execute();
 		
-		System.out.println("Delete Successfully!");
 		return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();

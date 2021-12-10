@@ -59,7 +59,6 @@ public class HoaDonDaoImpl implements HoaDonDao {
 			st.setInt(4, hoadon.getIdNV());
 			st.executeUpdate();
 			ResultSet rs = st.getGeneratedKeys();
-			System.out.println("Insert Successfully!");
 			if (rs.next()) {
 				key = rs.getInt(1);
 			}
@@ -79,7 +78,6 @@ public class HoaDonDaoImpl implements HoaDonDao {
 			st.setInt(4, hoadon.getIdNV());
 			st.setInt(5, hoadon.getId());
 			st.execute();
-			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -94,9 +92,9 @@ public class HoaDonDaoImpl implements HoaDonDao {
 		st.setInt(1, id);
 		st.execute();
 		
-		System.out.println("Delete Successfully!");
 		return true;
-		}catch(Exception ex) {
+		}
+		catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		return false;

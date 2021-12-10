@@ -71,7 +71,6 @@ public class KhachHangDaoImpl implements KhachHangDao{
 			st.setString(4, khachhang.getPhone());
 			st.setString(5, khachhang.getAddress());
 			st.execute();
-			System.out.println("Insert Successfully!");
 			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -90,7 +89,6 @@ public class KhachHangDaoImpl implements KhachHangDao{
 			st.setString(5, khachhang.getAddress());
 			st.setInt(6, khachhang.getId());
 			st.execute();
-			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -105,7 +103,6 @@ public class KhachHangDaoImpl implements KhachHangDao{
 		st.setInt(1, id);
 		st.execute();
 		
-		System.out.println("Delete Successfully!");
 		return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();

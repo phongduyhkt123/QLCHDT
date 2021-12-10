@@ -46,7 +46,6 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 			st.setDouble(3, hdct.getPrice());
 			st.setInt(4, hdct.getQuantity());
 			st.execute();
-			System.out.println("Insert HDCT Successfully!");
 			return true;
 		} catch(Exception ex) {
 			ex.printStackTrace();

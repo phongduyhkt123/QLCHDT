@@ -45,7 +45,6 @@ public class SanPhamDaoImpl implements SanPhamDao{
 			st.setDouble(2, sanpham.getPrice());
 			st.setInt(3, sanpham.getQuantity());
 			st.execute();
-			System.out.println("Insert Successfully!");
 			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -62,7 +61,6 @@ public class SanPhamDaoImpl implements SanPhamDao{
 			st.setInt(3, sanpham.getQuantity());
 			st.setInt(4, sanpham.getId());
 			st.execute();
-			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -77,7 +75,6 @@ public class SanPhamDaoImpl implements SanPhamDao{
 		st.setInt(1, id);
 		st.execute();
 		
-		System.out.println("Delete Successfully!");
 		return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
