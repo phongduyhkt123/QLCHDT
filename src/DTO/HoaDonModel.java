@@ -9,6 +9,8 @@ public class HoaDonModel {
 	
 	private int idNV;
 	private int idKH;
+	
+//	private String orderKey;
 
 	public HoaDonModel() {}
 
@@ -68,4 +70,12 @@ public class HoaDonModel {
 	public void setIdKH(int idKH) {
 		this.idKH = idKH;
 	}
+
+//	public String getOrderKey() {
+//		return orderKey;
+//	}
+//
+//	public void setOrderKey(String orderKey) {
+//		this.orderKey = orderKey;
+//	}
 }

@@ -17,6 +17,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+
+import Controller.LoginController;
+
 import javax.swing.JRadioButton;
 
 public class formLogin extends JFrame {
@@ -25,6 +28,9 @@ public class formLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField txfUsername;
 	private JPasswordField passwordField;
+	private JRadioButton rdbtnEmployee;
+	private JRadioButton rdbtnManage;
+	private JButton btnLogIn;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -61,14 +67,14 @@ public class formLogin extends JFrame {
 		lbBrand.setBounds(71, 30, 241, 50);
 		mainPanel.add(lbBrand);
 		
-		JRadioButton rdbtnManage = new JRadioButton("Manage");
+		rdbtnManage = new JRadioButton("Manage");
 		rdbtnManage.setForeground(new Color(25, 25, 112));
 		rdbtnManage.setOpaque(false);
 		rdbtnManage.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 15));
 		rdbtnManage.setBounds(70, 109, 109, 23);
 		mainPanel.add(rdbtnManage);
 		
-		JRadioButton rdbtnEmployee = new JRadioButton("Employee");
+		rdbtnEmployee = new JRadioButton("Employee");
 		rdbtnEmployee.setOpaque(false);
 		rdbtnEmployee.setForeground(new Color(25, 25, 112));
 		rdbtnEmployee.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 15));
@@ -108,7 +114,7 @@ public class formLogin extends JFrame {
 		passwordField.setBounds(155, 215, 190, 25);
 		mainPanel.add(passwordField);
 
-		JButton btnLogIn = new JButton("LOG IN");
+		btnLogIn = new JButton("LOG IN");
 		btnLogIn.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnLogIn.setForeground(new Color(25, 25, 112));
 		btnLogIn.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 16));
@@ -123,5 +129,7 @@ public class formLogin extends JFrame {
 				.getScaledInstance(bg.getWidth(), bg.getHeight(), Image.SCALE_SMOOTH));
 		bg.setIcon(bgload);
 		getContentPane().add(bg);
+		
+		LoginController controll = new LoginController(txfUsername, passwordField, rdbtnEmployee, rdbtnManage, btnLogIn);
 	}
 }

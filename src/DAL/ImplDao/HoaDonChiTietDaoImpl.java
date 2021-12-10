@@ -21,7 +21,7 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 		String sql = "Select * from hoadonchitiet";
 		List<HoaDonChiTietModel> list = new ArrayList<HoaDonChiTietModel>();
 		try {
-			Statement ps = (PreparedStatement) cnn.createStatement();
+			Statement ps = cnn.createStatement();
 	        ResultSet rs = ps.executeQuery(sql);
 			while(rs.next()){
 				HoaDonChiTietModel hdct = new HoaDonChiTietModel();
@@ -37,7 +37,8 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 		return list;
 	}
 
-	public boolean insert(HoaDonChiTietModel hdct) {	
+	public boolean insert(HoaDonChiTietModel hdct) {
+		System.out.println("Insert HDCT Successfully!");
 		try {
 			String sql = "insert into hoadonchitiet(idHD, idSP, donGia, soLuong) values(?,?,?,?)";
 			PreparedStatement st = cnn.prepareStatement(sql);
@@ -46,7 +47,7 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 			st.setDouble(3, hdct.getPrice());
 			st.setInt(4, hdct.getQuantity());
 			st.execute();
-			System.out.println("Insert Successfully!");
+			System.out.println("Insert HDCT Successfully!");
 			return true;
 		}catch(Exception ex) {
 			System.out.println("ERROR:"+ex.getMessage());

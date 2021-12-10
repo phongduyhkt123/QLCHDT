@@ -21,7 +21,7 @@ public class HoaDonDaoImpl implements HoaDonDao{
 		String sql = "Select * from hoadon";
 		List<HoaDonModel> list = new ArrayList<HoaDonModel>();
 		try {
-			Statement ps = (PreparedStatement) cnn.createStatement();
+			Statement ps =cnn.createStatement();
 	        ResultSet rs = ps.executeQuery(sql);
 			while(rs.next()){
 				HoaDonModel hoadon = new HoaDonModel();
@@ -38,21 +38,25 @@ public class HoaDonDaoImpl implements HoaDonDao{
 		return list;
 	}
 
-	public boolean insert(HoaDonModel hoadon) {	
+	public int insert(HoaDonModel hoadon) {	
+		int key = -1;
 		try {
 			String sql = "insert into hoadon(ngayTao, thanhTien, idKH, idNV) values(?,?,?,?)";
-			PreparedStatement st = cnn.prepareStatement(sql);
+			PreparedStatement st = cnn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			st.setDate(1, hoadon.getCreateDate());
 			st.setDouble(2, hoadon.getTotalPrice());
 			st.setInt(3, hoadon.getIdKH());
 			st.setInt(4, hoadon.getIdNV());
-			st.execute();
+			st.executeUpdate();
+			ResultSet rs = st.getGeneratedKeys();
 			System.out.println("Insert Successfully!");
-			return true;
+			if (rs.next()) {
+				key = rs.getInt(1);
+			}
 		}catch(Exception ex) {
 			System.out.println("ERROR:"+ex.getMessage());
 		}
-		return false;
+		return key;
 	}
 	
 	public boolean update(HoaDonModel hoadon) {	

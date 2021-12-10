@@ -225,6 +225,6 @@ public class product extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		SanPhamController controll = new SanPhamController(txfID, txfName, txfQuantity, txfPrice, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
+		SanPhamController controll = new SanPhamController(txfID, txfName, txfPrice, txfQuantity, txfFind, table, btnFind, cbFilter, cbID, btnSave, btnCancel, btnDisable, btnEdit, btnAdd);
 	}
 }

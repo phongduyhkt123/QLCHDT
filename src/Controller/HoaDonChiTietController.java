@@ -11,9 +11,12 @@ import DAL.HoaDonChiTietDao;
 import DAL.HoaDonDao;
 import DAL.KhachHangDao;
 import DAL.SanPhamDao;
+import DAL.ImplDao.HoaDonChiTietDaoImpl;
 import DAL.ImplDao.HoaDonDaoImpl;
 import DAL.ImplDao.KhachHangDaoImpl;
 import DAL.ImplDao.SanPhamDaoImpl;
+import DTO.HoaDonChiTietModel;
+import DTO.HoaDonModel;
 import DTO.KhachHangModel;
 import DTO.SanPhamModel;
 
@@ -21,6 +24,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +48,6 @@ public class HoaDonChiTietController {
     private KhachHangDao cDao;
     private HoaDonDao bDao;
     private HoaDonChiTietDao bdDao;
-    private int mode;
     
 	public HoaDonChiTietController(JTextField txfPro, JTextField txfPrice, JTextField txfQuantity, JTextField txfCus,
 			JTextField txfPhone, JTextField txfAddress, JTextField txfTotal, JTable table, JComboBox cbCus,
@@ -68,8 +71,10 @@ public class HoaDonChiTietController {
 		pDao = new SanPhamDaoImpl();
 		cDao = new KhachHangDaoImpl();
 		bDao = new HoaDonDaoImpl();
+		bdDao = new HoaDonChiTietDaoImpl();
 		setEvent();
 		loadCmbCustomer();
+		loadCmbProduct();
 		buttonChangeStats(1);
 	}
 
@@ -94,13 +99,21 @@ public class HoaDonChiTietController {
 //			}
 //		});
 //		
-//		btnAdd.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				mode = 1;
+		btnAdd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				addToTable();
 //				buttonChangeStats(2);
-//			}
-//		});
+			}
+		});
+		
+		btnPay.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				createBill();
+//				buttonChangeStats(2);
+			}
+		});
 //		
 //		btnEdit.addMouseListener(new MouseAdapter() {
 //			@Override
@@ -155,29 +168,6 @@ public class HoaDonChiTietController {
 //		});
     }
 
-	public void loadTable(List<SanPhamModel> list) {
-		String[] labels= {"ID", "Tên Sản Phẩm ", "Giá", "Số lượng"};
-		DefaultTableModel tableModel = new DefaultTableModel(labels, 0);
-		try {
-			for (SanPhamModel sanpham : list) {
-				Object[] row = {sanpham.getId(), sanpham.getName(), sanpham.getPrice(), sanpham.getQuantity()};
-				tableModel.addRow(row);
-			}
-			this.table.setModel(tableModel);
-		}catch(Exception ex) {
-			System.out.println(ex.getMessage());
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-	
-//	public void loadRow() {
-//		int row = table.getSelectedRow();
-//		txfID.setText(table.getValueAt(row, 0).toString());
-//		txfName.setText(table.getValueAt(row, 1).toString());
-//		txfPrice.setText(table.getValueAt(row, 2).toString());
-//		txfQuantity.setText(table.getValueAt(row, 3).toString());
-//	}
-	
 	public void loadCmbCustomer() {
 		List<KhachHangModel> list = cDao.getAll();
 		for (KhachHangModel khachhang : list) {
@@ -186,9 +176,9 @@ public class HoaDonChiTietController {
 	}
 	
 	public void loadCmbProduct() {
-		List<KhachHangModel> list = cDao.getAll();
-		for (KhachHangModel khachhang : list) {
-			cbCus.addItem(khachhang); // load customer name -- by override toString
+		List<SanPhamModel> list = pDao.getAll();
+		for (SanPhamModel sanpham : list) {
+			cbPro.addItem(sanpham);
 		}
 	}
 	
@@ -199,11 +189,89 @@ public class HoaDonChiTietController {
 	}
 	
 	public void loadProductInfo() {
-		KhachHangModel khachhang = (KhachHangModel)cbCus.getSelectedItem();
-		txfPhone.setText(khachhang.getPhone());
-		txfAddress.setText(khachhang.getAddress());
+		SanPhamModel sanpham = (SanPhamModel)cbPro.getSelectedItem();
+		txfPrice.setText(String.valueOf(sanpham.getPrice()));
+//		txfQuantity.setText(String.valueOf(sanpham.getQuantity()));
 	}
 	
+	public void addToTable() {
+//		String[] labels= {"Tên Sản Phẩm ", "Giá", "Số lượng"};
+		
+		DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+		try {
+			String name = ((SanPhamModel)cbPro.getSelectedItem()).getName();
+			int quantity = Integer.parseInt(txfQuantity.getText());
+			if (quantity < 1) {
+				JOptionPane.showMessageDialog(null, "Vui lòng nhập số lượng hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			boolean exist = false;
+			for (int i =0; i< tableModel.getRowCount(); i++) {
+				if(tableModel.getValueAt(i, 1).equals(name)) {
+					int choose = JOptionPane.showConfirmDialog(null, "Sản phẩm này đã được chọn. Bạn có muốn cập nhật lại số lượng không?", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+					if (choose == 0) {
+						tableModel.setValueAt(quantity, i, 3);
+					}
+					exist = true;
+				}
+			}
+			if(!exist) {
+				Object[] row = {((SanPhamModel)cbPro.getSelectedItem()).getId(), name, txfPrice.getText(), quantity};
+				tableModel.addRow(row);
+			}
+			this.table.setModel(tableModel);
+			showTotalPrice();
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void showTotalPrice() {
+		try {
+			DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+			double total = 0;
+			for (int i =0; i< tableModel.getRowCount(); i++) {
+				total += Double.parseDouble(tableModel.getValueAt(i, 2).toString()) 
+						* Double.parseDouble(tableModel.getValueAt(i, 3).toString());
+			}
+			txfTotal.setText(String.valueOf(total));
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	
+	public void createBill() {
+		DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+		try {
+			int id = bDao.insert(new HoaDonModel(new Date(new java.util.Date().getTime()),
+					Double.parseDouble(txfTotal.getText()),
+					1, //id nhan vien
+					((KhachHangModel)cbCus.getSelectedItem()).getId() // id khach hang
+					));
+			if (id == -1) {
+				JOptionPane.showMessageDialog(null, "Có lỗi xảy ra vui lòng thử lại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			for (int i =0; i< tableModel.getRowCount(); i++) {
+				int idSp = Integer.parseInt(tableModel.getValueAt(i, 0).toString());
+				double price = Double.parseDouble(tableModel.getValueAt(i, 2).toString());
+				int quantity = Integer.parseInt(tableModel.getValueAt(i, 3).toString());
+				bdDao.insert(new HoaDonChiTietModel(id,
+													idSp,
+													price,
+													quantity
+													));
+				System.out.println(i);
+			}
+			JOptionPane.showMessageDialog(null, "Tạo hóa đơn thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+		}catch(Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage() , "Lỗi", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
 	
 	public void buttonChangeStats(int stat) {
 		if (stat == 1) {
@@ -218,22 +286,5 @@ public class HoaDonChiTietController {
 			btnCancel.setEnabled(true);
 		}
 	}
-//	
-//	public List<SanPhamModel> find() {
-//		String kw = txfFind.getText();
-//		if (kw.equals("")) {
-//			return dao.getAll();
-//		}
-//		List<SanPhamModel> list = new ArrayList<SanPhamModel>();
-//		System.out.print(cbFilter.getSelectedIndex());
-//		if (cbFilter.getSelectedIndex() == 0) {
-//			SanPhamModel sanpham = dao.getById(Integer.parseInt(kw));
-//			if ( sanpham != null) {
-//				list.add(sanpham);
-//			}
-//		}else if (cbFilter.getSelectedIndex() == 1) {
-//			list = dao.getByName(kw);
-//		}
-//		return list;
-//	}
+
 }

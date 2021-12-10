@@ -54,4 +54,8 @@ public class SanPhamModel {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	@Override
+	public String toString() {
+		return name;
+	}
 }

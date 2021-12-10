@@ -10,5 +10,6 @@ public interface SanPhamDao{
 	public SanPhamModel getById(int id);
 	public boolean insert(SanPhamModel sanpham);
 	public boolean update(SanPhamModel sanpham);
+	public boolean changeQuantity(int id, int quantity);
 	public boolean delete(int id);
 }

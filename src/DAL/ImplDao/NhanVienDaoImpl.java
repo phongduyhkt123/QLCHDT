@@ -167,6 +167,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 		return false;
 	}
 	
+	
 	public boolean delete(int id) {
 		String sql = "delete from nhanvien where idNV=?";
 		try {

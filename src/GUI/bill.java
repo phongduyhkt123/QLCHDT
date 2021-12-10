@@ -204,6 +204,7 @@ public class bill extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
+				"ID", "T\u00EAn S\u1EA3n Ph\u1EA9m", "Gi\u00E1", "S\u1ED1 l\u01B0\u1EE3ng"
 			}
 		));
 		scrollPane.setViewportView(table);

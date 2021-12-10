@@ -126,4 +126,20 @@ public class SanPhamDaoImpl implements SanPhamDao{
 		}
 		return list;
 	}
+
+	@Override
+	public boolean changeQuantity(int id, int quantity) {
+		try {
+			String sql = "update sanpham set soLuong=? where idSP=?";
+			PreparedStatement st = cnn.prepareStatement(sql);
+			st.setInt(1, quantity);
+			st.setInt(2, id);
+			st.execute();
+			System.out.println("update Successfully!");
+			return true;
+		}catch(Exception ex) {
+			System.out.println("ERROR:"+ex.getMessage());
+		}
+		return false;
+	}
 }
