@@ -1,13 +1,6 @@
 /Application/
-/BLL/
-/Controller/
-/DAL/
-/DTO/
-/GUI/
-/Ultils/
-/background.png
-/logo.png
-/Connection/
+/DAO/
 /DBConnection/
 /Model/
-/DAO/
+/Ultils/
+/GUI/

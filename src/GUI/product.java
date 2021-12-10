@@ -52,7 +52,7 @@ public class product extends JPanel {
 		JPanel panelCus = new JPanel();
 		panelCus.setBorder(new LineBorder(new Color(25, 25, 112)));
 		panelCus.setBackground(new Color(176, 196, 222));
-		panelCus.setBounds(10, 30, 540, 214);
+		panelCus.setBounds(10, 30, 540, 170);
 		add(panelCus);
 		panelCus.setLayout(null);
 		
@@ -121,9 +121,6 @@ public class product extends JPanel {
 		btnAdd.setBounds(440, 10, 90, 30);
 		panelCus.add(btnAdd);
 		
-//		ImageIcon avtload =new ImageIcon(new ImageIcon(this.getClass().getResource("/background.png")).getImage().getScaledInstance(btnAdd.getWidth(),btnAdd.getHeight(), Image.SCALE_SMOOTH));
-//        btnAdd.setIcon(avtload);
-		
 		btnEdit = new JButton("Edit");
 		btnEdit.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnEdit.setBackground(new Color(204, 204, 255));
@@ -137,7 +134,7 @@ public class product extends JPanel {
 		btnCancel.setBackground(new Color(204, 204, 255));
 		btnCancel.setForeground(new Color(25, 25, 112));
 		btnCancel.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnCancel.setBounds(440, 130, 90, 30);
+		btnCancel.setBounds(440, 90, 90, 30);
 		panelCus.add(btnCancel);
 		
 		btnSave = new JButton("Save");
@@ -145,14 +142,14 @@ public class product extends JPanel {
 		btnSave.setBackground(new Color(204, 204, 255));
 		btnSave.setForeground(new Color(25, 25, 112));
 		btnSave.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
-		btnSave.setBounds(440, 170, 90, 30);
+		btnSave.setBounds(440, 130, 90, 30);
 		panelCus.add(btnSave);
 		
 		JLabel lbProList = new JLabel("PRODUCT LIST");
 		lbProList.setHorizontalAlignment(SwingConstants.CENTER);
 		lbProList.setForeground(new Color(25, 25, 112));
 		lbProList.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 20));
-		lbProList.setBounds(10, 250, 163, 30);
+		lbProList.setBounds(10, 210, 163, 30);
 		add(lbProList);
 		
 		cbFilter = new JComboBox();
@@ -161,7 +158,7 @@ public class product extends JPanel {
 		cbFilter.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		cbFilter.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		cbFilter.setBackground(new Color(245, 255, 250));
-		cbFilter.setBounds(265, 255, 80, 20);
+		cbFilter.setBounds(265, 215, 80, 20);
 		add(cbFilter);
 		
 		txfFind = new JTextField();
@@ -169,7 +166,7 @@ public class product extends JPanel {
 		txfFind.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		txfFind.setColumns(10);
 		txfFind.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		txfFind.setBounds(350, 255, 130, 20);
+		txfFind.setBounds(350, 215, 130, 20);
 		add(txfFind);
 		
 		btnFind = new JButton("Find");
@@ -177,19 +174,19 @@ public class product extends JPanel {
 		btnFind.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 12));
 		btnFind.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnFind.setBackground(new Color(204, 204, 255));
-		btnFind.setBounds(490, 255, 60, 20);
+		btnFind.setBounds(490, 215, 60, 20);
 		add(btnFind);
 		
 		JPanel panelProList = new JPanel();
 		panelProList.setOpaque(false);
 		panelProList.setBorder(new LineBorder(new Color(25, 25, 112)));
 		panelProList.setBackground(new Color(176, 196, 222));
-		panelProList.setBounds(10, 280, 540, 207);
+		panelProList.setBounds(10, 251, 540, 235);
 		add(panelProList);
 		panelProList.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 540, 207);
+		scrollPane.setBounds(0, 0, 540, 235);
 		panelProList.add(scrollPane);
 		
 		table = new JTable();

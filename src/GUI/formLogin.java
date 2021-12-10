@@ -98,7 +98,7 @@ public class formLogin extends JFrame {
 				txfUsername.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 				txfUsername.setHorizontalAlignment(SwingConstants.LEFT);
 				txfUsername.setForeground(new Color(25, 25, 112));
-				txfUsername.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 16));
+				txfUsername.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 13));
 				txfUsername.setColumns(10);
 				txfUsername.setBounds(155, 160, 190, 25);
 				mainPanel.add(txfUsername);
@@ -113,7 +113,7 @@ public class formLogin extends JFrame {
 		passwordField.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		passwordField.setForeground(new Color(25, 25, 112));
-		passwordField.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 16));
+		passwordField.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 13));
 		passwordField.setBounds(155, 215, 190, 25);
 		mainPanel.add(passwordField);
 
@@ -121,7 +121,7 @@ public class formLogin extends JFrame {
 		btnLogIn.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		btnLogIn.setForeground(new Color(25, 25, 112));
 		btnLogIn.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 16));
-		btnLogIn.setBackground(new Color(176, 196, 222));
+		btnLogIn.setBackground(new Color(204, 204, 255));
 		btnLogIn.setBounds(142, 285, 100, 30);
 		mainPanel.add(btnLogIn);
 
