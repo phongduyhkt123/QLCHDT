@@ -239,6 +239,7 @@ public class formAdmin extends JFrame {
 		btnStatis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Hide();
+				fStatis.getController().clearData();
 				fStatis.setVisible(true);
 			}
 		});

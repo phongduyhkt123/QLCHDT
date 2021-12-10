@@ -55,14 +55,11 @@ public class HoaDonController {
     private HoaDonDao bDao;
     private SanPhamDao pDao;
     private HoaDonChiTietDao bdDao;
-    
-    
 
 	public HoaDonController(int userId, JTextField txfEmp, JTextField txfCus, JTextField txfPhone, JTextField txfIdBill,
 			JDateChooser txdate, JTextField txfTotal, JTable tableHistory, JTextField txfFind, JTable tableDetail,
 			JTextField txfIdEmp, HoaDonController controller, JDateChooser dateFind, JComboBox cbFilter,
 			JButton btnFind) {
-		super();
 		this.userID = userId;
 		this.txfEmp = txfEmp;
 		this.txfCus = txfCus;
@@ -87,6 +84,14 @@ public class HoaDonController {
 		
 		loadData();
 		setEvent();
+		
+		txfEmp.setEditable(false);
+		txfCus.setEditable(false);
+		txfPhone.setEditable(false);
+		txfIdBill.setEditable(false);
+		txfTotal.setEditable(false);
+		txfIdEmp.setEditable(false);
+		txdate.setEnabled(false);
 	}
 
 	public void loadData() {
