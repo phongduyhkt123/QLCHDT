@@ -11,16 +11,22 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class bill extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txfPro;
 	private JTextField txfPrice;
 	private JTextField txfQuantity;
-	private JTable tablePro;
 	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txfPhone;
 	private JTextField txfAddress;
+	private JButton btnDel;
+	private JTable table;
+	private JButton btnAdd;
+	private JButton btnCancel;
+	private JComboBox cbPro;
+	private JComboBox cbID;
 
 	public bill() {
 		setOpaque(false);
@@ -96,21 +102,21 @@ public class bill extends JPanel {
 		lbPhone.setBounds(20, 50, 100, 30);
 		panelCus.add(lbPhone);
 		
-		textField_2 = new JTextField();
-		textField_2.setForeground(new Color(25, 25, 112));
-		textField_2.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-		textField_2.setColumns(10);
-		textField_2.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		textField_2.setBounds(115, 53, 100, 25);
-		panelCus.add(textField_2);
+		txfPhone = new JTextField();
+		txfPhone.setForeground(new Color(25, 25, 112));
+		txfPhone.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		txfPhone.setColumns(10);
+		txfPhone.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		txfPhone.setBounds(115, 53, 100, 25);
+		panelCus.add(txfPhone);
 		
-		JComboBox cbID_1 = new JComboBox();
-		cbID_1.setForeground(new Color(25, 25, 112));
-		cbID_1.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-		cbID_1.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		cbID_1.setBackground(new Color(245, 255, 250));
-		cbID_1.setBounds(115, 13, 175, 25);
-		panelCus.add(cbID_1);
+		cbID = new JComboBox();
+		cbID.setForeground(new Color(25, 25, 112));
+		cbID.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+		cbID.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		cbID.setBackground(new Color(245, 255, 250));
+		cbID.setBounds(115, 13, 175, 25);
+		panelCus.add(cbID);
 		
 		txfAddress = new JTextField();
 		txfAddress.setForeground(new Color(25, 25, 112));
@@ -126,7 +132,7 @@ public class bill extends JPanel {
 		lbAddress.setBounds(225, 50, 100, 30);
 		panelCus.add(lbAddress);
 		
-		JComboBox cbPro = new JComboBox();
+		cbPro = new JComboBox();
 		cbPro.setForeground(new Color(25, 25, 112));
 		cbPro.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
 		cbPro.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -134,7 +140,7 @@ public class bill extends JPanel {
 		cbPro.setBounds(115, 93, 175, 25);
 		panelCus.add(cbPro);
 		
-		JButton btnAdd = new JButton("Add");
+		btnAdd = new JButton("Add");
 		btnAdd.setBounds(417, 130, 90, 30);
 		panelCus.add(btnAdd);
 		btnAdd.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -143,7 +149,7 @@ public class bill extends JPanel {
 		btnAdd.setForeground(new Color(25, 25, 112));
 		btnAdd.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		
-		JButton btnCancel = new JButton("Cancel");
+		btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(417, 170, 90, 30);
 		panelCus.add(btnCancel);
 		btnCancel.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -174,10 +180,12 @@ public class bill extends JPanel {
 		add(panelProList);
 		panelProList.setLayout(null);
 		
-		tablePro = new JTable();
-		tablePro.setBackground(new Color(176, 196, 222));
-		tablePro.setBounds(0, 247, 540, -246);
-		panelProList.add(tablePro);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 540, 154);
+		panelProList.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		
 		JButton btnPay = new JButton("Pay");
 		btnPay.setBounds(460, 460, 90, 30);
@@ -187,7 +195,7 @@ public class bill extends JPanel {
 		btnPay.setForeground(new Color(25, 25, 112));
 		btnPay.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		
-		JButton btnDel = new JButton("Delete");
+		btnDel = new JButton("Delete");
 		btnDel.setBounds(360, 460, 90, 30);
 		add(btnDel);
 		btnDel.setForeground(new Color(25, 25, 112));

@@ -7,15 +7,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.toedter.calendar.JDateChooser;
-
 import DAL.SanPhamDao;
 import DAL.ImplDao.SanPhamDaoImpl;
 import DTO.SanPhamModel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +56,7 @@ public class SanPhamController {
 		dao = new SanPhamDaoImpl();
 		loadTable(dao.getAll());
 		setEvent();
+		buttonChangeStats(1);
 	}
 
 	public void setEvent() {	
