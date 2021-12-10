@@ -24,28 +24,14 @@ public class formAdmin extends JFrame {
 	private bill fBill;
 	private billHistory fHistory;
 	private statis fStatis;
-	private profile fProfile;
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					formAdmin frame = new formAdmin(1);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
+	private profile fProfile;	
 	
 	public formAdmin(Integer userId) {
 		fEmployee = new employee();
 		fCustomer = new customer();
 		fProduct = new product();
 		fBill = new bill(userId);
-		fHistory = new billHistory(0);
+		fHistory = new billHistory(-1, true);
 		fStatis = new statis();
 		fProfile = new profile(userId);
 		

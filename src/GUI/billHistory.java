@@ -34,11 +34,10 @@ public class billHistory extends JPanel {
 	private JTable tableDetail;
 	private JTextField txfIdEmp;
 	private HoaDonController controller;
-	private JDateChooser dateFind;
 	private JComboBox cbFilter;
 	private JButton btnFind;
 	
-	public billHistory(Integer userId) {
+	public billHistory(Integer userId, boolean isAdmin) {
 		setOpaque(false);
 		setBorder(new LineBorder(new Color(25, 25, 112)));
 		setBackground(new Color(235, 255, 250));
@@ -214,8 +213,13 @@ public class billHistory extends JPanel {
 		scrollHistory.setViewportView(tableHistory);
 		
 		cbFilter = new JComboBox();
-		cbFilter.setModel(new DefaultComboBoxModel(new String[] {"ID Bill", "ID Employee"}));
-		cbFilter.setBounds(172, 280, 80, 20);
+		if (isAdmin) {
+			cbFilter.setModel(new DefaultComboBoxModel(new String[] {"ID Bill", "ID Employee"}));
+		}
+		else {
+			cbFilter.setModel(new DefaultComboBoxModel(new String[] {"ID Bill"}));
+		}
+		cbFilter.setBounds(277, 281, 80, 20);
 		add(cbFilter);
 		cbFilter.setOpaque(false);
 		cbFilter.setForeground(new Color(25, 25, 112));
@@ -224,7 +228,7 @@ public class billHistory extends JPanel {
 		cbFilter.setBackground(new Color(245, 255, 250));
 		
 		txfFind = new JTextField();
-		txfFind.setBounds(260, 280, 115, 20);
+		txfFind.setBounds(365, 281, 115, 20);
 		add(txfFind);
 		txfFind.setForeground(new Color(25, 25, 112));
 		txfFind.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
@@ -239,15 +243,7 @@ public class billHistory extends JPanel {
 		btnFind.setForeground(new Color(25, 25, 112));
 		btnFind.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 12));
 		
-		dateFind = new JDateChooser();
-		dateFind.getCalendarButton().setForeground(new Color(25, 25, 112));
-		dateFind.getCalendarButton().setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
-		dateFind.setForeground(new Color(25, 25, 112));
-		dateFind.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 13));
-		dateFind.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		dateFind.setBounds(380, 278, 100, 25);
-		add(dateFind);
-		controller = new HoaDonController(userId, txfEmp, txfCus, txfPhone, txfIdBill, txdate, txfTotal, tableHistory, txfFind, tableDetail, txfIdEmp, controller, dateFind, cbFilter, btnFind);
+		controller = new HoaDonController(userId, txfEmp, txfCus, txfPhone, txfIdBill, txdate, txfTotal, tableHistory, txfFind, tableDetail, txfIdEmp, cbFilter, btnFind);
 	}
 	
 	public HoaDonController getController() {

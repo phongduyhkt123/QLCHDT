@@ -11,18 +11,28 @@ import DAO.HoaDonDao;
 import DBConnection.DBConnect;
 import Model.HoaDonModel;
 
-public class HoaDonDaoImpl implements HoaDonDao{
+public class HoaDonDaoImpl implements HoaDonDao {
 	Connection cnn;
 	public HoaDonDaoImpl() {
 		cnn = new DBConnect().getConnection();
 	}
 	
-	public List<HoaDonModel> getAll() {
-		String sql = "Select * from hoadon";
+	public List<HoaDonModel> getAll(Integer userId) {
+		String sql;
+		if (userId == null) {
+			sql = "Select * from hoadon";
+		}
+		else {
+			sql = "Select * from hoadon where idNV=?";
+		}
+		
 		List<HoaDonModel> list = new ArrayList<HoaDonModel>();
 		try {
-			Statement ps =cnn.createStatement();
-	        ResultSet rs = ps.executeQuery(sql);
+			PreparedStatement ps = cnn.prepareStatement(sql);
+			if (userId != null) {
+				ps.setInt(1, userId);
+			}
+	        ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				HoaDonModel hoadon = new HoaDonModel();
 				hoadon.setId(rs.getInt("idHD"));
@@ -92,12 +102,22 @@ public class HoaDonDaoImpl implements HoaDonDao{
 		return false;
 	}
 	
-	public HoaDonModel getById(int id) {
-		String sql = "Select * from hoadon where idHD=?";
+	public HoaDonModel getById(int id, Integer userId) {
+		String sql;
+		if (userId == null) {
+			sql = "Select * from hoadon where idHD=?";
+		}
+		else {
+			sql = "Select * from hoadon where idHD=? and idNV=?";
+		}
+		
 		HoaDonModel hoadon = null;
 		try {
 			PreparedStatement ps = cnn.prepareStatement(sql);
             ps.setInt(1, id);
+            if (userId != null) {
+            	ps.setInt(2, userId);
+            }
 	        ResultSet rs = ps.executeQuery();
 			if(rs.next()){
 				hoadon = new HoaDonModel();

@@ -24,25 +24,12 @@ public class formEmployee extends JFrame {
 	private bill fBill;
 	private billHistory fHistory;
 	private profile fProfile;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					formEmployee frame = new formEmployee(1);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	public formEmployee(Integer userId) {
 		fCustomer = new customer();
 		fProduct = new product();
 		fBill = new bill(userId);
-		fHistory = new billHistory(userId);
+		fHistory = new billHistory(userId, false);
 		fProfile = new profile(userId);
 		
 		setBackground(new Color(25, 25, 112));

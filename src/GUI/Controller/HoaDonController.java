@@ -35,7 +35,7 @@ import java.util.List;
 
 
 public class HoaDonController {
-	private int userID;
+	private Integer userId;
 	private JTextField txfEmp;
 	private JTextField txfCus;
 	private JTextField txfPhone;
@@ -46,8 +46,6 @@ public class HoaDonController {
 	private JTextField txfFind;
 	private JTable tableDetail;
 	private JTextField txfIdEmp;
-	private HoaDonController controller;
-	private JDateChooser dateFind;
 	private JComboBox cbFilter;
 	private JButton btnFind;
     private KhachHangDao cDao;
@@ -56,11 +54,10 @@ public class HoaDonController {
     private SanPhamDao pDao;
     private HoaDonChiTietDao bdDao;
 
-	public HoaDonController(int userId, JTextField txfEmp, JTextField txfCus, JTextField txfPhone, JTextField txfIdBill,
+	public HoaDonController(Integer userId, JTextField txfEmp, JTextField txfCus, JTextField txfPhone, JTextField txfIdBill,
 			JDateChooser txdate, JTextField txfTotal, JTable tableHistory, JTextField txfFind, JTable tableDetail,
-			JTextField txfIdEmp, HoaDonController controller, JDateChooser dateFind, JComboBox cbFilter,
-			JButton btnFind) {
-		this.userID = userId;
+			JTextField txfIdEmp, JComboBox cbFilter, JButton btnFind) {
+		this.userId = userId;
 		this.txfEmp = txfEmp;
 		this.txfCus = txfCus;
 		this.txfPhone = txfPhone;
@@ -71,8 +68,6 @@ public class HoaDonController {
 		this.txfFind = txfFind;
 		this.tableDetail = tableDetail;
 		this.txfIdEmp = txfIdEmp;
-		this.controller = controller;
-		this.dateFind = dateFind;
 		this.cbFilter = cbFilter;
 		this.btnFind = btnFind;
 		
@@ -95,7 +90,7 @@ public class HoaDonController {
 	}
 
 	public void loadData() {
-		loadTable(bDao.getAll());
+		loadTable(bDao.getAll(userId.intValue() == -1 ? null : userId));
 	}
 
 	private void setEvent() {	
@@ -115,7 +110,7 @@ public class HoaDonController {
     }
 
 	private void loadTable(List<HoaDonModel> list) {
-		String[] labels= {"ID", "ID Customer", "ID Employee", "CreateDate", "Total"};
+		String[] labels= {"ID", "ID Employee", "ID Customer", "Create date", "Total"};
 		DefaultTableModel tableModel = new DefaultTableModel(labels, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) { 
@@ -177,13 +172,13 @@ public class HoaDonController {
 	private List<HoaDonModel> find() {
 		String kw = txfFind.getText();
 		if (kw.equals("")) {
-			return bDao.getAll();
+			return bDao.getAll(userId.intValue() == -1 ? null : userId);
 		}
 		
 		List<HoaDonModel> list = new ArrayList<HoaDonModel>();
 		
 		if (cbFilter.getSelectedIndex() == 0) {
-			HoaDonModel hoadon = bDao.getById(Integer.parseInt(kw));
+			HoaDonModel hoadon = bDao.getById(Integer.parseInt(kw), userId.intValue() == -1 ? null : userId);
 			if ( hoadon != null) {
 				list.add(hoadon);
 			}
