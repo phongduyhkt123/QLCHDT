@@ -90,6 +90,8 @@ public class ProfileController {
 		this.avtImg = avtImg;
 		
 		txfID.setEditable(false);
+		cbRole.setEnabled(false);
+		enableChangePw(0);
 		dao = new NhanVienDaoImpl();
 		setEvent();
 		loadEmployee();
@@ -122,26 +124,88 @@ public class ProfileController {
 			}
 		});
 		
+		btnEdit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				buttonChangeStats(2);
+			}
+		});
+		
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				loadEmployee();
+				buttonChangeStats(1);
+			}
+		});
+		
+		btnCancelPw.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				psfOldPw.setText("");
+				psfNewPw.setText("");
+				psfConfirmPw.setText("");
+				enableChangePw(0);
+			}
+		});
+		
+		btnChangePw.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				enableChangePw(1);
+			}
+		});
+		
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					int input = JOptionPane.showConfirmDialog(null, "Do you want to update your information?");
-					if (input == 0) {
-						NhanVienModel nhanvien = dao.getById(userId);
-						dao.update(new NhanVienModel(Integer.parseInt(txfID.getText()),
-								txfName.getText(),
-								cbGender.getSelectedIndex() == 0? "Male": "Female",
-								new Date(txdate.getDate().getTime()),// dob
-								txfPhone.getText(),
-								txfAddress.getText(),
-								txfEmail.getText(),
-								nhanvien.getPassword(),
-								avtImg == null ? new byte[0] : avtImg,
-								cbRole.getSelectedIndex()+1,
-								cbStatus.getSelectedIndex() == 0? 1: 0
-								));
+				int input = JOptionPane.showConfirmDialog(null, "Do you want to update your information?");
+				if (input == 0) {
+					NhanVienModel nhanvien = dao.getById(userId);
+					if(!dao.update(new NhanVienModel(Integer.parseInt(txfID.getText()),
+							txfName.getText(),
+							cbGender.getSelectedIndex() == 0? "Male": "Female",
+							new Date(txdate.getDate().getTime()),// dob
+							txfPhone.getText(),
+							txfAddress.getText(),
+							txfEmail.getText(),
+							nhanvien.getPassword(),
+							avtImg == null ? nhanvien.getAvatar() : avtImg,
+							cbRole.getSelectedIndex()+1,
+							cbStatus.getSelectedIndex() == 0? 1: 0
+							))) {
+						MyUtils.showErrorMessage("Error" , "Something Wrong! Please try again!");
 					}
-				}	
+					else {
+						MyUtils.showInfoMessage("Info", "Update profile success!");
+
+					}
+				}
+			}	
+		});
+		
+		btnSavePw.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (psfNewPw.getText().equals(psfConfirmPw.getText())){
+					NhanVienModel nhanvien = dao.getById(userId);
+					if(nhanvien.getPassword().equals(psfOldPw.getText())) {
+						nhanvien.setPassword(psfNewPw.getText());
+						dao.update(nhanvien);
+						MyUtils.showInfoMessage("Info", "Change password success!");
+						psfOldPw.setText("");
+						psfNewPw.setText("");
+						psfConfirmPw.setText("");
+						enableChangePw(0);
+					}
+					else {
+						MyUtils.showErrorMessage("Error" , "Wrong Password!");
+					}
+				}
+				else {
+					MyUtils.showErrorMessage("Confirm Error" , "Password not match!");
+				}
+			}	
 		});
 	}
 	
@@ -190,7 +254,6 @@ public class ProfileController {
 			txdate.setEnabled(false);
 			
 			cbStatus.setEnabled(false);
-			cbRole.setEnabled(false);
 			cbGender.setEnabled(false);
 		}
 		else {
@@ -206,8 +269,25 @@ public class ProfileController {
 			txdate.setEnabled(true);
 			
 			cbStatus.setEnabled(true);
-			cbRole.setEnabled(true);
 			cbGender.setEnabled(true);
+		}
+	}
+	
+	public void enableChangePw(int mode) {
+		if (mode == 1) {
+			psfOldPw.setEditable(true);
+			psfNewPw.setEditable(true);
+			psfConfirmPw.setEditable(true);
+			btnSavePw.setEnabled(true);
+			btnCancelPw.setEnabled(true);
+			btnChangePw.setEnabled(false);
+		}else {
+			psfOldPw.setEditable(false);
+			psfNewPw.setEditable(false);
+			psfConfirmPw.setEditable(false);
+			btnSavePw.setEnabled(false);
+			btnCancelPw.setEnabled(false);
+			btnChangePw.setEnabled(true);
 		}
 	}
 }
