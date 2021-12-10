@@ -98,7 +98,7 @@ public class HoaDonDaoImpl implements HoaDonDao{
 		try {
 			PreparedStatement ps = cnn.prepareStatement(sql);
             ps.setInt(1, id);
-	        ResultSet rs = ps.executeQuery(sql);
+	        ResultSet rs = ps.executeQuery();
 			if(rs.next()){
 				hoadon = new HoaDonModel();
 				hoadon.setId(rs.getInt("idHD"));
@@ -111,5 +111,27 @@ public class HoaDonDaoImpl implements HoaDonDao{
 			ex.printStackTrace();
 		}
 		return hoadon;
+	}
+	
+	public List<HoaDonModel> getByIdEmployee(int id) {
+		String sql = "Select * from hoadon where idNV = ?";
+		List<HoaDonModel> list = new ArrayList<HoaDonModel>();
+		try {
+			PreparedStatement ps = cnn.prepareStatement(sql);
+			ps.setInt(1, id);
+	        ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				HoaDonModel hoadon = new HoaDonModel();
+				hoadon.setId(rs.getInt("idHD"));
+				hoadon.setCreateDate(rs.getDate("ngayTao"));
+				hoadon.setTotalPrice(rs.getDouble("thanhTien"));
+				hoadon.setIdKH(rs.getInt("idKH"));
+				hoadon.setIdNV(rs.getInt("idNV"));
+				list.add(hoadon);
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
 	}
 }

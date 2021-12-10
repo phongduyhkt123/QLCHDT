@@ -61,4 +61,26 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 	public HoaDonChiTietModel getById(int id) {
 		return null;
 	}
+
+	@Override
+	public List<HoaDonChiTietModel> getByIdBill(int idBill) {
+		String sql = "Select * from hoadonchitiet where idHD = ?";
+		List<HoaDonChiTietModel> list = new ArrayList<HoaDonChiTietModel>();
+		try {
+			PreparedStatement ps = cnn.prepareStatement(sql);
+			ps.setInt(1, idBill);
+	        ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				HoaDonChiTietModel hdct = new HoaDonChiTietModel();
+				hdct.setIdHD(rs.getInt("idHD"));
+				hdct.setIdSP(rs.getInt("idSP"));
+				hdct.setPrice(rs.getDouble("donGia"));
+				hdct.setQuantity(rs.getInt("soLuong"));
+				list.add(hdct);
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return list;
+	}
 }

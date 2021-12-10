@@ -15,8 +15,11 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
+import GUI.Controller.HoaDonController;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class billHistory extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +32,11 @@ public class billHistory extends JPanel {
 	private JTable tableHistory;
 	private JTextField txfFind;
 	private JTable tableDetail;
-	private JTextField textField;
+	private JTextField txfIdEmp;
+	private HoaDonController controller;
+	private JDateChooser dateFind;
+	private JComboBox cbFilter;
+	private JButton btnFind;
 	
 	public billHistory() {
 		setOpaque(false);
@@ -163,13 +170,13 @@ public class billHistory extends JPanel {
 		lbIdEmp.setBounds(10, 80, 100, 30);
 		panelCus.add(lbIdEmp);
 		
-		textField = new JTextField();
-		textField.setForeground(new Color(25, 25, 112));
-		textField.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
-		textField.setColumns(10);
-		textField.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
-		textField.setBounds(100, 83, 100, 25);
-		panelCus.add(textField);
+		txfIdEmp = new JTextField();
+		txfIdEmp.setForeground(new Color(25, 25, 112));
+		txfIdEmp.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 14));
+		txfIdEmp.setColumns(10);
+		txfIdEmp.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
+		txfIdEmp.setBounds(100, 83, 100, 25);
+		panelCus.add(txfIdEmp);
 		
 		JLabel lbBillHistory = new JLabel("BILL HISTORY");
 		lbBillHistory.setHorizontalAlignment(SwingConstants.CENTER);
@@ -206,7 +213,8 @@ public class billHistory extends JPanel {
 		));
 		scrollHistory.setViewportView(tableHistory);
 		
-		JComboBox cbFilter = new JComboBox();
+		cbFilter = new JComboBox();
+		cbFilter.setModel(new DefaultComboBoxModel(new String[] {"ID Bill", "ID Employee"}));
 		cbFilter.setBounds(172, 280, 80, 20);
 		add(cbFilter);
 		cbFilter.setOpaque(false);
@@ -223,7 +231,7 @@ public class billHistory extends JPanel {
 		txfFind.setColumns(10);
 		txfFind.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		
-		JButton btnFind = new JButton("Find");
+		btnFind = new JButton("Find");
 		btnFind.setBounds(490, 280, 60, 20);
 		add(btnFind);
 		btnFind.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
@@ -231,7 +239,7 @@ public class billHistory extends JPanel {
 		btnFind.setForeground(new Color(25, 25, 112));
 		btnFind.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 12));
 		
-		JDateChooser dateFind = new JDateChooser();
+		dateFind = new JDateChooser();
 		dateFind.getCalendarButton().setForeground(new Color(25, 25, 112));
 		dateFind.getCalendarButton().setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 13));
 		dateFind.setForeground(new Color(25, 25, 112));
@@ -239,6 +247,10 @@ public class billHistory extends JPanel {
 		dateFind.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		dateFind.setBounds(380, 278, 100, 25);
 		add(dateFind);
-
+		controller = new HoaDonController(txfEmp, txfCus, txfPhone, txfIdBill, txdate, txfTotal, tableHistory, txfFind, tableDetail, txfIdEmp, controller, dateFind, cbFilter, btnFind);
+	}
+	
+	public HoaDonController getController() {
+		return controller;
 	}
 }
