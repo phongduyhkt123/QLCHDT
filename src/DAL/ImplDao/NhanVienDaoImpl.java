@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialBlob;
+
 import BLL.DBConnect;
 import DAL.NhanVienDao;
 import DTO.NhanVienModel;
@@ -30,7 +32,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setName(rs.getString("tenNV"));
                 nhanvien.setEmail(rs.getString("email"));
                 nhanvien.setAddress(rs.getString("diaChi"));
-                nhanvien.setAvatar(rs.getString("avatar"));
+                nhanvien.setAvatar(rs.getBlob("avatar"));
                 nhanvien.setDob(rs.getDate("ngaySinh"));
                 nhanvien.setGender(rs.getString("gioiTinh"));
                 nhanvien.setId(rs.getInt("idNV"));
@@ -58,7 +60,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setName(rs.getString("tenNV"));
                 nhanvien.setEmail(rs.getString("email"));
                 nhanvien.setAddress(rs.getString("diaChi"));
-                nhanvien.setAvatar(rs.getString("avatar"));
+                nhanvien.setAvatar(rs.getBlob("avatar"));
                 nhanvien.setDob(rs.getDate("ngaySinh"));
                 nhanvien.setGender(rs.getString("gioiTinh"));
                 nhanvien.setPassword(rs.getString("password"));
@@ -68,7 +70,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 				list.add(nhanvien);
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return list;
 	}
@@ -86,7 +88,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setName(rs.getString("tenNV"));
                 nhanvien.setEmail(rs.getString("email"));
                 nhanvien.setAddress(rs.getString("diaChi"));
-                nhanvien.setAvatar(rs.getString("avatar"));
+                nhanvien.setAvatar(rs.getBlob("avatar"));
                 nhanvien.setDob(rs.getDate("ngaySinh"));
                 nhanvien.setGender(rs.getString("gioiTinh"));
                 nhanvien.setPassword(rs.getString("password"));
@@ -95,7 +97,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setStatus(rs.getInt("status"));
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return nhanvien;
 	}
@@ -113,14 +115,21 @@ public class NhanVienDaoImpl implements NhanVienDao{
 			st.setString(5, nhanvien.getAddress());
 			st.setString(6, nhanvien.getEmail());
 			st.setString(7, nhanvien.getPassword());
-			st.setString(8, nhanvien.getAvatar());
+			
+			if (nhanvien.getAvatar().length > 0) {
+				st.setBlob(8, new SerialBlob(nhanvien.getAvatar()));
+			}
+			else {
+				st.setNull(8, java.sql.Types.BLOB);
+			}
+			
 			st.setInt(9, nhanvien.getRole());
 			st.setInt(10, nhanvien.getStatus());
 			st.execute();
 			System.out.println("Insert Successfully!");
 			return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -138,7 +147,14 @@ public class NhanVienDaoImpl implements NhanVienDao{
 			st.setString(5, nhanvien.getAddress());
 			st.setString(6, nhanvien.getEmail());
 			st.setString(7, nhanvien.getPassword());
-			st.setString(8, nhanvien.getAvatar());
+			
+			if (nhanvien.getAvatar().length > 0) {
+				st.setBlob(8, new SerialBlob(nhanvien.getAvatar()));
+			}
+			else {
+				st.setNull(8, java.sql.Types.BLOB);
+			}
+			
 			st.setInt(9, nhanvien.getRole());
 			st.setInt(10, nhanvien.getStatus());
 			st.setInt(11, nhanvien.getId());
@@ -146,7 +162,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 			System.out.println("update Successfully!");
 			return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -161,7 +177,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 		System.out.println("Delete Successfully!");
 		return true;
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -180,7 +196,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
                 nhanvien.setName(rs.getString("tenNV"));
                 nhanvien.setEmail(rs.getString("email"));
                 nhanvien.setAddress(rs.getString("diaChi"));
-                nhanvien.setAvatar(rs.getString("avatar"));
+                nhanvien.setAvatar(rs.getBlob("avatar"));
                 nhanvien.setDob(rs.getDate("ngaySinh"));
                 nhanvien.setGender(rs.getString("gioiTinh"));
                 nhanvien.setPassword(rs.getString("password"));
@@ -190,7 +206,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 				list.add(nhanvien);
 			}
 		}catch(Exception ex) {
-			System.out.println("ERROR:"+ex.getMessage());
+			ex.printStackTrace();
 		}
 		return list;
 	}

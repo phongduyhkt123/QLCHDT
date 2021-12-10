@@ -31,11 +31,11 @@ public class employee extends JPanel {
 	private JTextField txfEmail;
 	private JTextField txfPasswd;
 	private JTextField txfFind;
+	private JLabel lblAvt;
 	private JDateChooser txdate;
 	private JTable table;
 	private JComboBox cbRole;
 	private JComboBox cbGender;
-	private Canvas canvasAvt;
 	private JButton btnUpload;
 	private JButton btnAdd;
 	private JButton btnEdit;
@@ -166,11 +166,6 @@ public class employee extends JPanel {
 		txfPasswd.setColumns(10);
 		txfPasswd.setBorder(new LineBorder(new Color(25, 25, 112), 1, true));
 		
-		canvasAvt = new Canvas();
-		canvasAvt.setBounds(5, 10, 90, 116);
-		panelEmp.add(canvasAvt);
-		canvasAvt.setBackground(new Color(245, 255, 250));
-		
 		btnUpload = new JButton("Upload");
 		btnUpload.setBounds(5, 130, 90, 30);
 		panelEmp.add(btnUpload);
@@ -297,6 +292,11 @@ public class employee extends JPanel {
 		btnFind.setBounds(490, 285, 60, 20);
 		add(btnFind);
 		
+		lblAvt = new JLabel("");
+		lblAvt.setBounds(5, 10, 90, 116);
+		lblAvt.setBackground(new Color(245, 255, 250));
+		panelEmp.add(lblAvt);
+		
 		JPanel panelEmpList = new JPanel();
 		panelEmpList.setBorder(new LineBorder(new Color(25, 25, 112)));
 		panelEmpList.setBackground(new Color(176, 196, 222));
@@ -324,7 +324,6 @@ public class employee extends JPanel {
 		));
 		scrollPane.setViewportView(table);
 		
-		NhanVienController controll = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, canvasAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind, cbStatus);
-
+		NhanVienController controll = new NhanVienController(txfID, txfName, txfPhone, txfAddress, txfEmail, txfPasswd, txfFind, txdate, table, cbRole, cbGender, lblAvt, btnUpload, btnAdd, btnEdit, btnDisable, btnCancel, btnSave, cbFilter, btnFind, cbStatus);
 	}
 }

@@ -33,8 +33,9 @@ public class formEmployee extends JFrame {
 		});
 	}
 	customer fCustomer = new customer();
-	product fProduct =new product();
-	bill fBill =new bill();
+	product fProduct = new product();
+	bill fBill = new bill();
+	employee fEmployee = new employee();
 	
 	public formEmployee() {
 		setBackground(new Color(25, 25, 112));
@@ -128,9 +129,15 @@ public class formEmployee extends JFrame {
 		fBill.setBackground(new Color(235, 255, 250));
 		contentPane.add(fBill);
 		
+		fEmployee.setVisible(false);
+		fEmployee.setOpaque(false);
+		fEmployee.setBounds(135, 0, 559, 500);
+		fEmployee.setBackground(new Color(235, 255, 250));
+		contentPane.add(fEmployee);
+		
 		JLabel bg =new JLabel();
 		bg.setBounds(0,0,700,500);
-		ImageIcon avtload =new ImageIcon(new ImageIcon(this.getClass().getResource("/background.png")).getImage().getScaledInstance(bg.getWidth(),bg.getHeight(), Image.SCALE_SMOOTH));
+		ImageIcon avtload = new ImageIcon(new ImageIcon(this.getClass().getResource("/background.png")).getImage().getScaledInstance(bg.getWidth(),bg.getHeight(), Image.SCALE_SMOOTH));
         bg.setIcon(avtload);
 		getContentPane().add(bg);
 		
@@ -154,11 +161,19 @@ public class formEmployee extends JFrame {
 				fBill.setVisible(true);
 			}
 		});
+		
+		btnProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Hide();
+				fEmployee.setVisible(true);
+			}
+		});
 	}
 	
 	void Hide() {
 		fCustomer.setVisible(false);
 		fProduct.setVisible(false);
 		fBill.setVisible(false);
+		fEmployee.setVisible(false);
 	}
 }
