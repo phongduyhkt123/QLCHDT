@@ -35,6 +35,7 @@ import java.util.List;
 
 
 public class HoaDonController {
+	private int userID;
 	private JTextField txfEmp;
 	private JTextField txfCus;
 	private JTextField txfPhone;
@@ -57,11 +58,12 @@ public class HoaDonController {
     
     
 
-	public HoaDonController(JTextField txfEmp, JTextField txfCus, JTextField txfPhone, JTextField txfIdBill,
+	public HoaDonController(int userId, JTextField txfEmp, JTextField txfCus, JTextField txfPhone, JTextField txfIdBill,
 			JDateChooser txdate, JTextField txfTotal, JTable tableHistory, JTextField txfFind, JTable tableDetail,
 			JTextField txfIdEmp, HoaDonController controller, JDateChooser dateFind, JComboBox cbFilter,
 			JButton btnFind) {
 		super();
+		this.userID = userId;
 		this.txfEmp = txfEmp;
 		this.txfCus = txfCus;
 		this.txfPhone = txfPhone;
@@ -99,74 +101,12 @@ public class HoaDonController {
 			}
 		});
 		
-//		btnAdd.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				mode = 1;
-//				buttonChangeStats(2);
-//				
-//				txfName.setText("");
-//				txfPhone.setText("");
-//				txfAddress.setText("");
-//				txfId.setText("");
-//			}
-//		});
-//		
-//		btnEdit.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				mode = 2;
-//				buttonChangeStats(2);
-//			}
-//		});
-//		
-//		btnCancel.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				buttonChangeStats(1);
-//			}
-//		});
-//		
 		btnFind.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				loadTable(find());
 			}
 		});
-//		
-//		btnSave.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if (mode == 1) {
-//					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new customer?");
-//					if (input == 0) {
-//						dao.insert(new HoaDonModel(
-//								txfName.getText(),
-//								cbGender.getSelectedIndex() == 0? "Nam": "Nữ",
-//								new Date(txdate.getDate().getTime()),// dob
-//								txfPhone.getText(),
-//								txfAddress.getText()
-//								));
-//						loadTable(dao.getAll());
-//						buttonChangeStats(1);
-//					}
-//
-//				}else if (mode == 2) {
-//					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this customer infomation?");
-//					if (input == 0) {
-//						dao.update(new HoaDonModel(Integer.parseInt(txfId.getText()),
-//								txfName.getText(),
-//								cbGender.getSelectedIndex() == 0? "Nam": "Nữ",
-//								new Date(txdate.getDate().getTime()),// dob
-//								txfPhone.getText(),
-//								txfAddress.getText()
-//								));
-//						loadTable(dao.getAll());
-//						buttonChangeStats(1);
-//					}
-//				}	
-//			}
-//		});
     }
 
 	private void loadTable(List<HoaDonModel> list) {
@@ -227,36 +167,8 @@ public class HoaDonController {
 		txfCus.setText(kh.getName());
 		
 		loadChildTable(bdDao.getByIdBill(Integer.parseInt(txfIdBill.getText())));
-
 	}
 	
-//	private void buttonChangeStats(int stat) {
-//		if (stat == 1) {
-//			btnAdd.setEnabled(true);
-//			btnEdit.setEnabled(true);
-//			btnSave.setEnabled(false);
-//			btnCancel.setEnabled(false);
-//
-//			txfName.setEditable(false);
-//			txfPhone.setEditable(false);
-//			txfAddress.setEditable(false);
-//			
-//			cbGender.setEnabled(false);
-//		}
-//		else {
-//			btnAdd.setEnabled(false);
-//			btnEdit.setEnabled(false);
-//			btnSave.setEnabled(true);
-//			btnCancel.setEnabled(true);
-//			
-//			txfName.setEditable(true);
-//			txfPhone.setEditable(true);
-//			txfAddress.setEditable(true);
-//			
-//			cbGender.setEnabled(true);
-//		}
-//	}
-//	
 	private List<HoaDonModel> find() {
 		String kw = txfFind.getText();
 		if (kw.equals("")) {

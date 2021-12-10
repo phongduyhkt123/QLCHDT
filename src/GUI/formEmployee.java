@@ -42,8 +42,8 @@ public class formEmployee extends JFrame {
 		fCustomer = new customer();
 		fProduct = new product();
 		fBill = new bill(userId);
-		fHistory = new billHistory();
-		fProfile = new profile();
+		fHistory = new billHistory(userId);
+		fProfile = new profile(userId);
 		
 		setBackground(new Color(25, 25, 112));
 		setTitle("Employee");

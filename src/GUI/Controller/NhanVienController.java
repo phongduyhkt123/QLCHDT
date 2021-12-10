@@ -241,7 +241,7 @@ public class NhanVienController {
 		int row = table.getSelectedRow();
 		txfID.setText(table.getValueAt(row, 0).toString());
 		txfName.setText(table.getValueAt(row, 1).toString());
-		cbGender.setSelectedIndex(table.getValueAt(row, 2).equals("Nam") ? 0: 1);
+		cbGender.setSelectedIndex(table.getValueAt(row, 2).equals("Male") ? 0: 1);
 		txdate.setDate((java.util.Date) table.getValueAt(row, 3));
 		txfPhone.setText(table.getValueAt(row, 4).toString());
 		txfAddress.setText(table.getValueAt(row, 5).toString());
