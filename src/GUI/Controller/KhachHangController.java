@@ -22,7 +22,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class KhachHangController {
 	private JTextField txfName;
 	private JTextField txfPhone;
@@ -44,7 +43,6 @@ public class KhachHangController {
 	public KhachHangController(JTextField txfName, JTextField txfPhone, JTextField txfAddress, JTextField txfFind,
 			JDateChooser txdate, JTextField txfId, JComboBox cbGender, JButton btnAdd, JButton btnEdit,
 			JButton btnCancel, JButton btnSave, JComboBox cbFilter, JButton btnFind, JTable table) {
-		super();
 		this.txfName = txfName;
 		this.txfPhone = txfPhone;
 		this.txfAddress = txfAddress;
@@ -67,6 +65,14 @@ public class KhachHangController {
 
 	public void loadData() {
 		loadTable(dao.getAll());
+		
+		txfId.setText("");
+		txfName.setText("");
+		txfPhone.setText("");
+		txfAddress.setText("");
+		txdate.setDate(null);
+		
+		loadRow();
 	}
 
 	private void setEvent() {	
@@ -93,6 +99,11 @@ public class KhachHangController {
 		btnEdit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (table.getSelectedRow() == -1) {
+					MyUtils.showErrorMessage("Error", "Please select a customer to edit first!");
+					return;
+				}
+				
 				mode = 2;
 				buttonChangeStats(2);
 			}
@@ -102,6 +113,7 @@ public class KhachHangController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buttonChangeStats(1);
+				loadRow();
 			}
 		});
 		
@@ -115,37 +127,47 @@ public class KhachHangController {
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (txdate.getDate() == null || txdate.getDate() == null) {
-					MyUtils.showErrorMessage("Error", "Please choose date of birth!");
+				if (txfName.getText().equals("") || txfPhone.getText().equals("") || txfAddress.getText().equals("")) {
+					MyUtils.showErrorMessage("Error" , "Please fill the customer information properly!");
 					return;
 				}
 				
 				if (mode == 1) {
 					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new customer?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
-						dao.insert(new KhachHangModel(
+						if (!dao.insert(new KhachHangModel(
 								txfName.getText(),
 								cbGender.getSelectedIndex() == 0? "Male": "Female",
-								new Date(txdate.getDate().getTime()),// dob
+								txdate.getDate() == null ? null : new Date(txdate.getDate().getTime()),
 								txfPhone.getText(),
 								txfAddress.getText()
-								));
-						loadTable(dao.getAll());
-						buttonChangeStats(1);
+								))) {
+							MyUtils.showErrorMessage("Error" , "Something Wrong! Please try again!");
+						}
+						else {
+							loadTable(dao.getAll());
+							buttonChangeStats(1);
+							MyUtils.showInfoMessage("Info", "Create customer success!");
+						}
 					}
 
 				}else if (mode == 2) {
 					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this customer infomation?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
-						dao.update(new KhachHangModel(Integer.parseInt(txfId.getText()),
+						if (!dao.update(new KhachHangModel(Integer.parseInt(txfId.getText()),
 								txfName.getText(),
 								cbGender.getSelectedIndex() == 0? "Male": "Female",
-								new Date(txdate.getDate().getTime()),// dob
+								txdate.getDate() == null ? null : new Date(txdate.getDate().getTime()),
 								txfPhone.getText(),
 								txfAddress.getText()
-								));
-						loadTable(dao.getAll());
-						buttonChangeStats(1);
+								))) {
+							MyUtils.showErrorMessage("Error" , "Something Wrong! Please try again!");
+						}
+						else {
+							loadTable(dao.getAll());
+							buttonChangeStats(1);
+							MyUtils.showInfoMessage("Info", "Update customer success!");
+						}
 					}
 				}	
 			}
@@ -179,6 +201,14 @@ public class KhachHangController {
 			return;
 		
 		int row = table.getSelectedRow();
+
+		if (row == -1) {
+			if (table.getRowCount() > 0) {
+				table.setRowSelectionInterval(0, 0);
+				row = table.getSelectedRow();
+			}
+		}
+		
 		txfId.setText(table.getValueAt(row, 0).toString());
 		txfName.setText(table.getValueAt(row, 1).toString());
 		cbGender.setSelectedIndex(table.getValueAt(row, 2).equals("Male") ? 0: 1);
@@ -199,6 +229,7 @@ public class KhachHangController {
 			txfAddress.setEditable(false);
 			
 			cbGender.setEnabled(false);
+			txdate.setEnabled(false);
 		}
 		else {
 			btnAdd.setEnabled(false);
@@ -211,6 +242,7 @@ public class KhachHangController {
 			txfAddress.setEditable(true);
 			
 			cbGender.setEnabled(true);
+			txdate.setEnabled(true);
 		}
 	}
 	

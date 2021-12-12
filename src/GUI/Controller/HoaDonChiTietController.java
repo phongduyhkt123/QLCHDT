@@ -90,6 +90,7 @@ public class HoaDonChiTietController {
 	public void loadData() {
 		txfQuantity.setText("");
 		txfTotal.setText("0");
+		clearTable();
 		loadCmbCustomer();
 		loadCmbProduct();
 	}
@@ -192,6 +193,11 @@ public class HoaDonChiTietController {
 	private void addToTable() {
 		DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
 		
+		if (cbPro.getSelectedItem() == null) {
+			MyUtils.showErrorMessage("Error", "Please choose product first!");
+			return;
+		}
+		
 		try {
 			SanPhamModel sanpham = ((SanPhamModel)cbPro.getSelectedItem());
 			String name = sanpham.getName();
@@ -201,7 +207,7 @@ public class HoaDonChiTietController {
 				return;
 			}
 			if (quantity > sanpham.getQuantity()) {
-				MyUtils.showErrorMessage("Error", "Not enought quantity! Maximum: " + String.valueOf(sanpham.getQuantity()));
+				MyUtils.showErrorMessage("Error", "Not enough quantity! Maximum quantity is " + String.valueOf(sanpham.getQuantity()));
 				return;
 			}
 			boolean exist = false;
@@ -249,19 +255,26 @@ public class HoaDonChiTietController {
 	}
 	
 	private void createBill() {
-		DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
 		if (cbCus.getSelectedItem() == null) {
-			MyUtils.showErrorMessage("Information", "Please choose customer first!");
+			MyUtils.showErrorMessage("Error", "Please choose customer first!");
 			return;
 		}
+		
+		DefaultTableModel tableModel = (DefaultTableModel)table.getModel();
+		
+		if (tableModel.getRowCount() == 0) {
+			MyUtils.showErrorMessage("Error", "At least one product is required to create bill!");
+			return;
+		}
+		
 		try {
 			int id = bDao.insert(new HoaDonModel(new Date(new java.util.Date().getTime()),
 					Double.parseDouble(txfTotal.getText()),
-					userId, //id nhan vien
-					((KhachHangModel)cbCus.getSelectedItem()).getId() // id khach hang
+					userId,
+					((KhachHangModel)cbCus.getSelectedItem()).getId()
 					));
 			if (id == -1) {
-				MyUtils.showErrorMessage("Information", "Something went wrong, please try again!");
+				MyUtils.showErrorMessage("Error", "Something went wrong, please try again!");
 				return;
 			}
 			for (int i =0; i< tableModel.getRowCount(); i++) {
@@ -280,7 +293,8 @@ public class HoaDonChiTietController {
 			txfQuantity.setText("");
 			txfTotal.setText("0");
 			MyUtils.showInfoMessage("Information", "Create bill successfully!");
-		}catch(Exception ex) {
+		}
+		catch(Exception ex) {
 			ex.printStackTrace();
 			MyUtils.showErrorMessage("Error", ex.getMessage());
 		}
@@ -297,7 +311,7 @@ public class HoaDonChiTietController {
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"ID", "Product name", "Price", "Quantity"}) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				return super.isCellEditable(row, column);
+				return false;
 			}
 		});
 	}

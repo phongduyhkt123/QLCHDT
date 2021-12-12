@@ -178,8 +178,7 @@ public class bill extends JPanel {
 		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] {"ID", "Product name", "Price", "Quantity"}) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				// TODO Auto-generated method stub
-				return super.isCellEditable(row, column);
+				return false;
 			}
 		});
 		scrollPane.setViewportView(table);

@@ -161,6 +161,11 @@ public class ProfileController {
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (txfName.getText().equals("") || txfPhone.getText().equals("") || txfEmail.getText().equals("")) {
+					MyUtils.showErrorMessage("Error" , "Please fill the employee information properly!");
+					return;
+				}
+				
 				int input = JOptionPane.showConfirmDialog(null, "Do you want to update your information?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (input == 0) {
 					NhanVienModel nhanvien = dao.getById(userId);
@@ -189,6 +194,11 @@ public class ProfileController {
 		btnSavePw.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (psfNewPw.getText().equals("")) {
+					MyUtils.showErrorMessage("Error", "Please enter new password!");
+					return;
+				}
+				
 				if (psfNewPw.getText().equals(psfConfirmPw.getText())){
 					NhanVienModel nhanvien = dao.getById(userId);
 					if(nhanvien.getPassword().equals(psfOldPw.getText())) {
@@ -205,7 +215,7 @@ public class ProfileController {
 					}
 				}
 				else {
-					MyUtils.showErrorMessage("Confirm Error" , "Password not match!");
+					MyUtils.showErrorMessage("Confirm Error" , "Confirm password do not match!");
 				}
 			}	
 		});

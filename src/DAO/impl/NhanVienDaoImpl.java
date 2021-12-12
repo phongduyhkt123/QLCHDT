@@ -18,6 +18,7 @@ public class NhanVienDaoImpl implements NhanVienDao{
 	public NhanVienDaoImpl() {
 		cnn = new DBConnect().getConnection();
 	}
+	
 	public NhanVienModel login(String phone, String password) {
 		
 		String sql = "Select * from nhanvien where SDT = ? and password = ?";

@@ -56,7 +56,7 @@ public class formLogin extends JFrame {
 		lbBrand.setBounds(71, 30, 241, 50);
 		mainPanel.add(lbBrand);
 		
-		rdbtnManage = new JRadioButton("Manage");
+		rdbtnManage = new JRadioButton("Manager");
 		rdbtnManage.setForeground(new Color(25, 25, 112));
 		rdbtnManage.setOpaque(false);
 		rdbtnManage.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 15));

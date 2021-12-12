@@ -19,7 +19,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class SanPhamController {
 	private JTextField txfID;
 	private JTextField txfName;
@@ -39,7 +38,6 @@ public class SanPhamController {
 	public SanPhamController(JTextField txfID, JTextField txfName, JTextField txfPrice, JTextField txfQuantity,
 			JTextField txfFind, JTable table, JButton btnFind, JComboBox cbFilter, JButton btnSave,
 			JButton btnCancel, JButton btnEdit, JButton btnAdd) {
-		super();
 		this.txfID = txfID;
 		this.txfName = txfName;
 		this.txfPrice = txfPrice;
@@ -60,6 +58,13 @@ public class SanPhamController {
 	
 	public void loadData() {
 		loadTable(dao.getAll());
+		
+		txfID.setText("");
+		txfName.setText("");
+		txfPrice.setText("");
+		txfQuantity.setText("");
+		
+		loadRow();
 	}
 
 	private void setEvent() {	
@@ -85,7 +90,12 @@ public class SanPhamController {
 		
 		btnEdit.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
+				if (table.getSelectedRow() == -1) {
+					MyUtils.showErrorMessage("Error", "Please select a product to edit first!");
+					return;
+				}
+				
 				mode = 2;
 				buttonChangeStats(2);
 			}
@@ -95,6 +105,7 @@ public class SanPhamController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				buttonChangeStats(1);
+				loadRow();
 			}
 		});
 		
@@ -108,28 +119,44 @@ public class SanPhamController {
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (txfPrice.getText().equals("") || txfQuantity.getText().equals("") || txfName.getText().equals("")) {
+					MyUtils.showErrorMessage("Error", "Please fill the information properly!");
+					return;
+				}
+				
 				if (mode == 1) {
 					int input = JOptionPane.showConfirmDialog(null, "Do you want to create new product?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
-						dao.insert(new SanPhamModel(
+						if (!dao.insert(new SanPhamModel(
 								txfName.getText(),
 								Double.parseDouble(txfPrice.getText()),
 								Integer.parseInt(txfQuantity.getText())
-								));
-						loadTable(dao.getAll());
-						buttonChangeStats(1);
+								))) {
+							MyUtils.showErrorMessage("Error" , "Something Wrong! Please try again!");
+						}
+						else {
+							loadTable(dao.getAll());
+							buttonChangeStats(1);
+							MyUtils.showInfoMessage("Info", "Update product success!");
+						}
+						
 					}
 
 				}else if (mode == 2) {
 					int input = JOptionPane.showConfirmDialog(null, "Do you want to update this product's information?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (input == 0) {
-						dao.update(new SanPhamModel(Integer.parseInt(txfID.getText()),
+						if (!dao.update(new SanPhamModel(Integer.parseInt(txfID.getText()),
 								txfName.getText(),
 								Double.parseDouble(txfPrice.getText()),
 								Integer.parseInt(txfQuantity.getText())
-								));
-						loadTable(dao.getAll());
-						buttonChangeStats(1);
+								))) {
+							MyUtils.showErrorMessage("Error" , "Something Wrong! Please try again!");
+						}
+						else {
+							loadTable(dao.getAll());
+							buttonChangeStats(1);
+							MyUtils.showInfoMessage("Info", "Update product success!");
+						}
 					}
 				}	
 			}
@@ -162,6 +189,17 @@ public class SanPhamController {
 			return;
 		
 		int row = table.getSelectedRow();
+		
+		if (row == -1) {
+			if (table.getRowCount() > 0) {
+				table.setRowSelectionInterval(0, 0);
+				row = table.getSelectedRow();
+			}
+			else {
+				return;
+			}
+		}
+		
 		txfID.setText(table.getValueAt(row, 0).toString());
 		txfName.setText(table.getValueAt(row, 1).toString());
 		txfPrice.setText(table.getValueAt(row, 2).toString());

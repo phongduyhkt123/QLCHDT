@@ -33,7 +33,8 @@ public class KhachHangDaoImpl implements KhachHangDao{
 				khachhang.setPhone(rs.getString("SDT"));
 				list.add(khachhang);
 			}
-		}catch(Exception ex) {
+		}
+		catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		return list;
@@ -99,11 +100,11 @@ public class KhachHangDaoImpl implements KhachHangDao{
 	public boolean delete(int id) {
 		String sql = "delete from khachhang where idKH=?";
 		try {
-		PreparedStatement st = cnn.prepareStatement(sql);
-		st.setInt(1, id);
-		st.execute();
-		
-		return true;
+			PreparedStatement st = cnn.prepareStatement(sql);
+			st.setInt(1, id);
+			st.execute();
+			
+			return true;
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}

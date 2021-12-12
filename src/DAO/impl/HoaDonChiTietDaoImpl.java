@@ -56,10 +56,6 @@ public class HoaDonChiTietDaoImpl implements HoaDonChiTietDao{
 	public boolean update(HoaDonChiTietModel hdct) {	
 		return false;
 	}
-	
-	public HoaDonChiTietModel getById(int id) {
-		return null;
-	}
 
 	@Override
 	public List<HoaDonChiTietModel> getByIdBill(int idBill) {

@@ -42,7 +42,8 @@ public class HoaDonDaoImpl implements HoaDonDao {
 				hoadon.setIdNV(rs.getInt("idNV"));
 				list.add(hoadon);
 			}
-		}catch(Exception ex) {
+		}
+		catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		return list;
@@ -88,11 +89,11 @@ public class HoaDonDaoImpl implements HoaDonDao {
 	public boolean delete(int id) {
 		String sql = "delete from hoadon where idHD=?";
 		try {
-		PreparedStatement st = cnn.prepareStatement(sql);
-		st.setInt(1, id);
-		st.execute();
-		
-		return true;
+			PreparedStatement st = cnn.prepareStatement(sql);
+			st.setInt(1, id);
+			st.execute();
+			
+			return true;
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
